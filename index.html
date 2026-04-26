@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sofis Hub | Início</title>
+
+  <style>
+    html {
+      background: #ffffff;
+    }
+
+    body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.12s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- SISTEMA DE TEMA CORRIGIDO -->
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+
+      if (savedTheme === "light") {
+        document.documentElement.classList.remove("dark-mode");
+      }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container nav">
+      <h1 class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </h1>
+
+      <nav class="nav-desktop">
+        <ul class="menu">
+          <li><a href="index.html" class="ativo">Início</a></li>
+          <li><a href="#sobre">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <!-- BOTÃO TEMA -->
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <a href="index.html">Início</a>
+      <a href="#sobre">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero-index">
+      <div class="container hero-grid">
+
+        <div class="hero-content">
+          <span class="hero-pill">♡ Sofis Hub</span>
+
+          <h2>Conteúdo privado, acesso direto e experiências exclusivas.</h2>
+
+          <p>
+            Um espaço organizado para quem busca uma experiência mais discreta,
+            premium e direta, com acesso a packs, VIP, serviços e mimos.
+          </p>
+
+          <div class="hero-actions">
+            <a href="vip.html" class="btn btn-primary">Acessar VIP</a>
+            <a href="packs.html" class="btn btn-secondary">Ver packs</a>
+          </div>
+
+          <div class="hero-points">
+            <span>Ambiente privado</span>
+            <span>Experiência premium</span>
+            <span>Acesso direto</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="hero-image-placeholder"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="about-section" id="sobre">
+      <div class="container">
+
+        <div class="about-heading">
+          <div class="about-icon">♡</div>
+          <h2>Sobre a Sofis</h2>
+        </div>
+
+        <div class="about-grid">
+
+          <div class="about-image-card">
+            <img src="sofis.jpg" alt="Sofis Hub">
+            <span class="about-floating-icon">✦</span>
+          </div>
+
+          <div class="about-side">
+
+            <div class="about-content-card">
+              <span class="about-label">Quem sou eu</span>
+
+              <p>
+                Um espaço criado para oferecer uma experiência mais próxima,
+                privada e sem enrolação.
+              </p>
+
+              <p>
+                A proposta do Sofis Hub é simples: organização, privacidade e
+                acesso rápido ao que realmente interessa.
+              </p>
+            </div>
+
+            <div class="about-extra">
+              <div class="about-tags">
+                <span>Kawaii</span>
+                <span>Premium</span>
+                <span>Exclusiva</span>
+                <span>Conteúdo</span>
+              </div>
+
+              <a href="#sobre" class="btn btn-primary">
+                Conhecer mais
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="index-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <span>✦ Experiências</span>
+          <h2>Escolha seu acesso</h2>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <h3>VIP</h3>
+            <p>Experiência completa</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Packs</h3>
+            <p>Conteúdos organizados</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Serviços</h3>
+            <p>Personalizado</p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Mimos</h3>
+            <p>Interações especiais</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <h2>Sofis<span>Hub</span></h2>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
