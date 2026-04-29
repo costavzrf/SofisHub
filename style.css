@@ -2,29 +2,9 @@
    para não bloquear a renderização da página */
 
 /* ============================================================
-   VARIÁVEIS — MODO CLARO (padrão)
-   CORREÇÃO: definição única aqui; bloco duplicado "html:not(.dark-mode)"
-   no final do arquivo foi removido
+   VARIÁVEIS — TEMA ÚNICO ESCURO
    ============================================================ */
-:root {
-  --bg: #ffffff;
-  --bg-soft: #fffdf4;
-  --bg-card: rgba(255, 255, 255, 0.96);
-
-  --text: #1b1d21;
-  --muted: #4b515a;
-
-  --yellow: #eccd2d;
-  --yellow-soft: rgba(236, 205, 45, 0.12);
-  --yellow-dark: #a88a2a;
-
-  --border: rgba(20, 20, 20, 0.12);
-  --shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
-
-  --radius: 28px;
-}
-
-/* MODO ESCURO */
+:root,
 html.dark-mode {
   --bg: #0f1115;
   --bg-soft: #151820;
@@ -39,6 +19,8 @@ html.dark-mode {
 
   --border: rgba(236, 205, 45, 0.14);
   --shadow: 0 18px 45px rgba(0, 0, 0, 0.38);
+
+  --radius: 28px;
 }
 
 /* ============================================================
@@ -552,13 +534,7 @@ html.dark-mode .switch-stars {
   overflow: hidden;
 }
 
-html:not(.dark-mode) .hero-card {
-  background: #ffffff;
-  border: 1px solid rgba(20, 20, 20, 0.14);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.04);
-}
+
 
 .hero-card::before {
   content: "";
@@ -632,13 +608,7 @@ html.dark-mode .hero-image-placeholder {
   box-shadow: var(--shadow);
 }
 
-html:not(.dark-mode) .about-image-card {
-  background: #ffffff;
-  border: 1px solid rgba(20, 20, 20, 0.14);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.04);
-}
+
 
 .about-image-card img {
   display: block;
@@ -679,13 +649,7 @@ html:not(.dark-mode) .about-image-card {
   box-shadow: var(--shadow);
 }
 
-html:not(.dark-mode) .about-content-card {
-  background: #ffffff;
-  border: 1px solid rgba(20, 20, 20, 0.14);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.04);
-}
+
 
 .about-content-card::before,
 .about-content-card::after {
@@ -796,13 +760,7 @@ html.dark-mode .index-section {
   overflow: hidden;
 }
 
-html:not(.dark-mode) .feature-card {
-  background: #ffffff;
-  border: 1px solid rgba(20, 20, 20, 0.14);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.04);
-}
+
 
 .feature-card::before {
   content: "";
@@ -1237,12 +1195,7 @@ html:not(.dark-mode) .feature-card {
   overflow: hidden;
 }
 
-html:not(.dark-mode) .sobre-hero-frame {
-  background: #fff;
-  box-shadow:
-    0 30px 70px rgba(0,0,0,0.10),
-    0 2px 8px rgba(0,0,0,0.05);
-}
+
 
 .sobre-hero-frame img {
   display: block;
@@ -1281,9 +1234,7 @@ html:not(.dark-mode) .sobre-hero-frame {
   text-align: center;
 }
 
-html:not(.dark-mode) .shstat {
-  background: rgba(255,255,255,0.96);
-}
+
 
 .shstat-icon {
   font-size: 14px;
@@ -1356,11 +1307,7 @@ html:not(.dark-mode) .shstat {
   box-shadow: var(--shadow);
 }
 
-html:not(.dark-mode) .historia-card {
-  background: #fff;
-  border: 1px solid rgba(20,20,20,0.12);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-}
+
 
 .hc-main {
   background:
@@ -1440,11 +1387,7 @@ html:not(.dark-mode) .historia-card {
   overflow: hidden;
 }
 
-html:not(.dark-mode) .hobby-card {
-  background: #fff;
-  border: 1px solid rgba(20,20,20,0.12);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.07);
-}
+
 
 .hobby-card::before {
   content: "";
@@ -1508,11 +1451,7 @@ html:not(.dark-mode) .hobby-card {
   transition: transform 0.26s ease, border-color 0.26s ease;
 }
 
-html:not(.dark-mode) .jogo-card {
-  background: #fff;
-  border: 1px solid rgba(20,20,20,0.12);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.07);
-}
+
 
 .jogo-card:hover {
   transform: translateY(-4px);
@@ -1609,10 +1548,7 @@ html:not(.dark-mode) .jogo-card {
   box-shadow: var(--shadow);
 }
 
-html:not(.dark-mode) .animes-pills span {
-  background: #fff;
-  border: 1px solid rgba(20,20,20,0.12);
-}
+
 
 .animes-pills span:hover {
   background: var(--yellow-soft);
@@ -1640,10 +1576,7 @@ html:not(.dark-mode) .animes-pills span {
   overflow: hidden;
 }
 
-html:not(.dark-mode) .cta-box {
-  background: #fff;
-  border-color: rgba(20,20,20,0.12);
-}
+
 
 .cta-orbs {
   position: absolute;
@@ -1796,52 +1729,13 @@ html.dark-mode .header {
 }
 
 /* MODO CLARO — cards mais destacados */
-html:not(.dark-mode) {
-  --bg: #ffffff;
-  --bg-soft: #f8f6ec;
-  --bg-card: #ffffff;
 
-  --border: rgba(20, 20, 20, 0.13);
-  --shadow:
-    0 22px 55px rgba(0, 0, 0, 0.11),
-    0 4px 14px rgba(0, 0, 0, 0.05);
-}
 
-html:not(.dark-mode) body {
-  background:
-    radial-gradient(circle at top left, rgba(236, 205, 45, 0.10), transparent 28%),
-    linear-gradient(180deg, #ffffff 0%, #faf8ef 48%, #ffffff 100%);
-}
 
-html:not(.dark-mode) .hero-card,
-html:not(.dark-mode) .about-image-card,
-html:not(.dark-mode) .about-content-card,
-html:not(.dark-mode) .feature-card,
-html:not(.dark-mode) .historia-card,
-html:not(.dark-mode) .hobby-card,
-html:not(.dark-mode) .jogo-card,
-html:not(.dark-mode) .animes-pills span,
-html:not(.dark-mode) .cta-box {
-  background:
-    linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
-  border: 1px solid rgba(20, 20, 20, 0.14);
-  box-shadow:
-    0 24px 55px rgba(0, 0, 0, 0.12),
-    0 6px 18px rgba(0, 0, 0, 0.055),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
 
-html:not(.dark-mode) .feature-card:hover,
-html:not(.dark-mode) .historia-card:hover,
-html:not(.dark-mode) .hobby-card:hover,
-html:not(.dark-mode) .jogo-card:hover,
-html:not(.dark-mode) .animes-pills span:hover {
-  transform: translateY(-7px);
-  border-color: rgba(214, 184, 58, 0.38);
-  box-shadow:
-    0 34px 75px rgba(0, 0, 0, 0.16),
-    0 0 0 1px rgba(214, 184, 58, 0.16);
-}
+
+
+
 
 /* PADRÃO GLOBAL PARA CARDS FUTUROS */
 .premium-card {
@@ -1882,10 +1776,7 @@ html:not(.dark-mode) .animes-pills span:hover {
     z-index: 5;
   }
 
-  html:not(.dark-mode) .shstat {
-    background: rgba(255, 255, 255, 0.96);
-    border-color: rgba(20, 20, 20, 0.12);
-  }
+  
 
   .shstat-num {
     font-size: 1.05rem;

@@ -3,21 +3,13 @@
 // ============================================================
 
 const html       = document.documentElement;
-const themeToggle  = document.getElementById("themeToggle");
 const menuBtn    = document.getElementById("mobileMenuBtn");
 const mobilePanel  = document.getElementById("mobileMenuPanel");
 
-// CORREÇÃO: bloco de leitura de tema REMOVIDO daqui.
-// Ele já existe no <script> inline do <head> do HTML e precisa rodar
-// antes do CSS para evitar flash. Duplicar aqui é redundante.
-
-// ── TEMA ────────────────────────────────────────────────────
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const isDark = html.classList.toggle("dark-mode");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  });
-}
+// Tema único: site sempre escuro.
+html.classList.add("dark-mode");
+html.style.colorScheme = "dark";
+localStorage.setItem("theme", "dark");
 
 // ── MENU MOBILE ─────────────────────────────────────────────
 if (menuBtn && mobilePanel) {
@@ -56,10 +48,48 @@ if (menuBtn && mobilePanel) {
   });
 }
 
-// ── PAGE READY ───────────────────────────────────────────────
-// CORREÇÃO: usa "load" em vez de "DOMContentLoaded" para garantir que
-// imagens como sofis.jpg já foram carregadas antes de exibir a página,
-// evitando saltos visuais (layout shift).
-window.addEventListener("load", () => {
-  html.classList.add("page-ready");
-});
+// ── PREFETCH DE PÁGINAS INTERNAS ─────────────────────────────
+// Aquece HTMLs internos ao passar o mouse/tocar nos links para reduzir espera.
+const prefetchedPages = new Set();
+
+function prefetchPage(url) {
+  if (prefetchedPages.has(url)) return;
+  prefetchedPages.add(url);
+
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.href = url;
+  link.as = "document";
+  document.head.appendChild(link);
+}
+
+function setupInstantNavigation() {
+  const links = [...document.querySelectorAll('a[href$=".html"], a[href="/"]')]
+    .map((anchor) => anchor.getAttribute("href"))
+    .filter((href) => href && !href.startsWith("http") && !href.startsWith("#"));
+
+  document.querySelectorAll('a[href$=".html"], a[href="/"]').forEach((anchor) => {
+    const href = anchor.getAttribute("href");
+    if (!href || href.startsWith("http") || href.startsWith("#")) return;
+
+    anchor.addEventListener("pointerenter", () => prefetchPage(href), { once: true });
+    anchor.addEventListener("touchstart", () => prefetchPage(href), { once: true, passive: true });
+  });
+
+  const warmPages = () => {
+    links.forEach(prefetchPage);
+    ["checkout.html", "checkout-mimos.html"].forEach(prefetchPage);
+  };
+
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(warmPages, { timeout: 1200 });
+  } else {
+    setTimeout(warmPages, 300);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupInstantNavigation, { once: true });
+} else {
+  setupInstantNavigation();
+}

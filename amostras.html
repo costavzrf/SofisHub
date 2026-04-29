@@ -11,20 +11,18 @@
 
   <script>
     (() => {
-      const t = localStorage.getItem("theme");
-      if (t === "dark") document.documentElement.classList.add("dark-mode");
+      document.documentElement.classList.add("dark-mode");
+      document.documentElement.style.colorScheme = "dark";
+      localStorage.setItem("theme", "dark");
     })();
   </script>
 
   <style>
-    html { background: #ffffff; }
-    html.dark-mode { background: #08090c; }
-    body { opacity: 0; visibility: hidden; }
-    html.page-ready body {
-      opacity: 1; visibility: visible;
-      transition: opacity 0.18s ease;
+    html {
+      background: #08090c;
+      color-scheme: dark;
     }
-  </style>
+</style>
 
   <link rel="stylesheet" href="style.css" />
 
@@ -1088,15 +1086,6 @@
       <div class="nav-actions">
         <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
 
-        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
-          <span class="switch-bg"></span>
-          <span class="switch-moon-shade"></span>
-          <span class="switch-cloud cloud-1"></span>
-          <span class="switch-cloud cloud-2"></span>
-          <span class="switch-cloud cloud-3"></span>
-          <span class="switch-stars"></span>
-          <span class="switch-thumb"></span>
-        </button>
 
         <button class="mobile-menu-btn" id="mobileMenuBtn"
           aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">

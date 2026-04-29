@@ -14,33 +14,18 @@
   <!-- SISTEMA DE TEMA: precisa rodar antes do CSS para evitar flash -->
   <script>
     (() => {
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark-mode");
-      }
+      document.documentElement.classList.add("dark-mode");
+      document.documentElement.style.colorScheme = "dark";
+      localStorage.setItem("theme", "dark");
     })();
   </script>
 
   <style>
     html {
-      background: #ffffff;
-    }
-
-    html.dark-mode {
       background: #08090c;
+      color-scheme: dark;
     }
-
-    body {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    html.page-ready body {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.12s ease;
-    }
-  </style>
+</style>
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -76,15 +61,7 @@
         <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
 
         <!-- Botão de tema: aria-label já existia, mantido -->
-        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
-          <span class="switch-bg"></span>
-          <span class="switch-moon-shade"></span>
-          <span class="switch-cloud cloud-1"></span>
-          <span class="switch-cloud cloud-2"></span>
-          <span class="switch-cloud cloud-3"></span>
-          <span class="switch-stars"></span>
-          <span class="switch-thumb"></span>
-        </button>
+
 
         <!-- CORREÇÃO: aria-label e aria-expanded adicionados -->
         <button
