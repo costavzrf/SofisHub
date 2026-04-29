@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Sobre mim</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.classList.add("dark-mode");
+    })();
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    html.dark-mode { background: #08090c; }
+    body { opacity: 0; visibility: hidden; }
+    html.page-ready body {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sobre.css" />
+</head>
+
+<body>
+
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- HEADER (igual ao index) -->
+  <header class="header">
+    <div class="container nav">
+      <div class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html" class="ativo" aria-current="page">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu-panel" id="mobileMenuPanel"
+      aria-label="Menu mobile" aria-hidden="true">
+      <a href="index.html">Início</a>
+      <a href="sobre.html" aria-current="page">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <!-- ══════════════════════════════════════════
+         HERO — SOBRE
+    ══════════════════════════════════════════ -->
+    <section class="sobre-hero" aria-labelledby="sobre-hero-titulo">
+      <div class="sobre-hero-bg" aria-hidden="true">
+        <div class="shb-orb shb-orb-1"></div>
+        <div class="shb-orb shb-orb-2"></div>
+        <div class="shb-orb shb-orb-3"></div>
+        <div class="shb-grid"></div>
+      </div>
+
+      <div class="container sobre-hero-inner">
+        <div class="sobre-hero-text">
+          <span class="hero-pill">♡ Sobre mim</span>
+          <h1 id="sobre-hero-titulo">Oii, eu sou a <em>Sofis</em></h1>
+          <p>Criadora de conteúdo, gamer, otaka e apaixonada por tudo que é fofo e exclusivo. Bem-vinda ao meu mundinho.</p>
+
+          <div class="hero-actions">
+            <a href="vip.html" class="btn btn-primary">Acessar VIP</a>
+            <a href="amostras.html" class="btn btn-secondary">Conhecer mais</a>
+          </div>
+        </div>
+
+        <div class="sobre-hero-card-wrap" aria-hidden="true">
+          <div class="sobre-hero-frame">
+            <img src="sofis.jpg" alt="Foto de perfil da Sofis"
+              width="480" height="580" loading="eager" decoding="async" />
+            <div class="shf-glow"></div>
+          </div>
+
+          <!-- Stats flutuantes -->
+          <div class="shstat shstat-1">
+            <span class="shstat-icon">★</span>
+            <span class="shstat-num">18</span>
+            <span class="shstat-label">Anos</span>
+          </div>
+          <div class="shstat shstat-2">
+            <span class="shstat-icon">♡</span>
+            <span class="shstat-num">1,66</span>
+            <span class="shstat-label">Altura</span>
+          </div>
+          <div class="shstat shstat-3">
+            <span class="shstat-icon">✦</span>
+            <span class="shstat-num">Portugal</span>
+            <span class="shstat-label">Origem</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HISTÓRIA
+    ══════════════════════════════════════════ -->
+    <section class="sobre-historia" id="historia" aria-labelledby="historia-titulo">
+      <div class="container">
+        <div class="section-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Minha história
+        </div>
+        <h2 id="historia-titulo" class="section-title">Quem sou eu</h2>
+
+        <div class="historia-grid">
+
+          <div class="historia-card hc-main">
+            <div class="hc-corner hc-corner-tl" aria-hidden="true">✦</div>
+            <div class="hc-corner hc-corner-tr" aria-hidden="true">✦</div>
+            <span class="about-label">Minha história</span>
+            <p>Meu nome é Sofia, eu tenho 18 aninhos (quase 19) e sou portuguesa, porém atualmente moro no Sul do Brasil ♡</p>
+            <p>Sou muito apaixonada por animais, e atualmente tenho duas gatinhas (a mia e a pandora). E eu AMO passar meu tempo brincando com elas</p>
+            <p>Eu sou VICIADA em Naruto, e em Batman, minha personagem favorita é a Selina (Mulher-Gato), também gosto de alguns personagens fofinhos tipo a hello kitty</p>
+            <p>As vezes vou na academia, não muito frequente mas vou rsrs. Porém gosto de passar meu tempo em casa, jogando, assistindo e tocando minha bucetinha 🥺 </p>
+          </div>
+
+          <div class="historia-card hc-extra">
+            <div class="hc-corner hc-corner-tl" aria-hidden="true">✦</div>
+            <div class="hc-corner hc-corner-tr" aria-hidden="true">✦</div>
+            <span class="about-label">Um pouco mais sobre mim</span>
+            <p>Além de criar conteúdo, eu amo fazer coleções de action figures, cartinhas e hqs. Minha cor favorita é rosa, tanto que tenho varias roupinhas e lingeries rosinhas</p>
+            <p>Eu sou APAIXONADA por roupinha curta, quanto mais curtinho melhor principalmente a saia, as vezes eu até uso camisa infatil e fica PERFEITO no meu corpinho</p>
+            <p>No tempo livre eu gosto de assistir filmes de romance ou animes. Além de Portugal (nasci lá), eu também já visitei a Espanha e a França, porém agora eu tô planejando ir na Suiça. Eu amo a vibe de paz que a Suiça passa, paisagens, pessoas, é tudo tão perfeito</p>
+          </div>
+
+        </div>
+
+        <!-- Tags de personalidade -->
+        <div class="sobre-tags-row">
+          <span>Portuguesa</span>
+          <span>Rabuda</span>
+          <span>Bucetinha rosa</span>
+          <span>Otaka</span>
+          <span>Batman lover</span>
+          <span>Naruto lover</span>
+          <span>Coquette sexy</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HOBBIES
+    ══════════════════════════════════════════ -->
+    <section class="sobre-hobbies" aria-labelledby="hobbies-titulo">
+      <div class="container">
+        <div class="section-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Meus hobbies
+        </div>
+        <h2 id="hobbies-titulo" class="section-title">O que me faz feliz</h2>
+
+        <div class="hobbies-grid">
+
+          <article class="hobby-card hc-featured">
+            <div class="hobby-icon" aria-hidden="true">🎮</div>
+            <h3>Jogos</h3>
+            <p>Adoro jogar joguinhos fofinhos, e principalmente jogos de hístoria </p>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon" aria-hidden="true">📺</div>
+            <h3>Animes</h3>
+            <p>Sou apaixonada por animes clássicos, tipo Naruto, Dbz e One Piece</p>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon" aria-hidden="true">📚</div>
+            <h3>Leitura</h3>
+            <p>Amo passar o tempo lendo, gosto de ler principalmente Dark Romance e Hq's</p>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon" aria-hidden="true">🐱</div>
+            <h3>Gatinhas</h3>
+            <p>Tenho duas gatinhas que amo de paixão. Passar tempo com elas é o melhor da vida.</p>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon" aria-hidden="true">🎀</div>
+            <h3>Moda Coquette sexy</h3>
+            <p> Amo exibir minhas roupinhas curtinhas e minhas langeries</p>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon" aria-hidden="true">✈️</div>
+            <h3>Viagens</h3>
+            <p>Já conheci alguns países e agora quero conhecer as paisangens da Suiça</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         JOGOS FAVORITOS
+    ══════════════════════════════════════════ -->
+    <section class="sobre-jogos" aria-labelledby="jogos-titulo">
+      <div class="container">
+        <div class="section-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Meus jogos favoritos
+        </div>
+        <h2 id="jogos-titulo" class="section-title">Onde eu vivo além da realidade</h2>
+        <p class="section-sub">Sou uma gamer apaixonada! Adoro jogos coloridos, fofos e com personagens kawaii. Passo horas jogando e às vezes faço streams dos meus favoritos pros vip's</p>
+
+        <div class="jogos-grid">
+
+          <article class="jogo-card jc-featured">
+            <div class="jc-header">
+              <div class="jc-icon" aria-hidden="true">⚔️</div>
+              <div>
+                <h3>Naruto Storm 4</h3>
+                <p class="jc-desc">Amo o modo história, e as vezes jogo com amigos</p>
+              </div>
+            </div>
+            <div class="jc-stats">
+              <div class="jc-stat">
+                <span class="jc-stat-label">Personagem Favorito</span>
+                <span class="jc-stat-val">Sarada</span>
+              </div>
+              <div class="jc-stat">
+                <span class="jc-stat-label">Tempo Jogado</span>
+                <span class="jc-stat-val">70+ horas</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="jogo-card">
+            <div class="jc-header">
+              <div class="jc-icon" aria-hidden="true">🤠</div>
+              <div>
+                <h3>Red Dead Redemption 2</h3>
+                <p class="jc-desc">Passo horas andando pelo mapa à cavalo</p>
+              </div>
+            </div>
+            <div class="jc-stats">
+              <div class="jc-stat">
+                <span class="jc-stat-label">Personagem Favorito</span>
+                <span class="jc-stat-val">Arthur Morgan</span>
+              </div>
+              <div class="jc-stat">
+                <span class="jc-stat-label">Tempo Jogado</span>
+                <span class="jc-stat-val">300+ horas</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="jogo-card">
+            <div class="jc-header">
+              <div class="jc-icon" aria-hidden="true">🧱</div>
+              <div>
+                <h3>Roblox</h3>
+                <p class="jc-desc">Amo jogar joguinhos de terror com os amigos</p>
+              </div>
+            </div>
+            <div class="jc-stats">
+              <div class="jc-stat">
+                <span class="jc-stat-label">Personagem Favorito</span>
+                <span class="jc-stat-val">Eu mesma</span>
+              </div>
+              <div class="jc-stat">
+                <span class="jc-stat-label">Tempo Jogado</span>
+                <span class="jc-stat-val">500+ horas</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="jogo-card">
+            <div class="jc-header">
+              <div class="jc-icon" aria-hidden="true">🧟</div>
+              <div>
+                <h3>Resident Evil 1</h3>
+                <p class="jc-desc">Amo todos da franquia, mas o 1 me pega mais</p>
+              </div>
+            </div>
+            <div class="jc-stats">
+              <div class="jc-stat">
+                <span class="jc-stat-label">Personagem Favorito</span>
+                <span class="jc-stat-val">Jill Valentine</span>
+              </div>
+              <div class="jc-stat">
+                <span class="jc-stat-label">Tempo Jogado</span>
+                <span class="jc-stat-val">50+ horas</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         ANIMES
+    ══════════════════════════════════════════ -->
+    <section class="sobre-animes" aria-labelledby="animes-titulo">
+      <div class="container">
+        <div class="section-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Animes que amo
+        </div>
+        <h2 id="animes-titulo" class="section-title">Minha lista de faves</h2>
+        <p class="section-sub">Sou uma otaka ASSUMIDA, e adoro assistir animes clássicos porque me lembram minha infância. Também gosto de alguns animes mais atuais</p>
+
+        <div class="animes-pills" role="list">
+          <span role="listitem">🥷 Naruto</span>
+          <span role="listitem">🐉 Dragon Ball</span>
+          <span role="listitem">🏴‍☠️ One Piece</span>
+          <span role="listitem">🪚 Chainsaw Man</span>
+          <span role="listitem">👊 Tokyo Revengers</span>
+          <span role="listitem">📓 Death Note</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CTA FINAL
+    ══════════════════════════════════════════ -->
+    <section class="sobre-cta" aria-labelledby="cta-titulo">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-orbs" aria-hidden="true">
+            <div class="co co-1"></div>
+            <div class="co co-2"></div>
+          </div>
+          <span class="hero-pill">✦ Acesso exclusivo</span>
+          <h2 id="cta-titulo">Quer me conhecer ainda mais de perto?</h2>
+          <p>Assine uma das minhas plataformas e tenha acesso a conteúdo exclusivo, direto e sem enrolação.</p>
+          <div class="hero-actions" style="justify-content:center">
+            <a href="vip.html" class="btn btn-primary">Acessar VIP</a>
+            <a href="packs.html" class="btn btn-secondary">Ver packs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-logo">Sofis<span>Hub</span></p>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

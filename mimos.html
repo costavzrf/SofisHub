@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Mimos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.classList.add("dark-mode");
+    })();
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    html.dark-mode { background: #08090c; }
+    body { opacity: 0; visibility: hidden; }
+    html.page-ready body { opacity: 1; visibility: visible; transition: opacity 0.15s ease; }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       MIMOS PAGE
+    ══════════════════════════════════════════ */
+
+    .mimos-hero {
+      position: relative;
+      padding: 78px 0 72px;
+      overflow: hidden;
+    }
+
+    .mimos-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mh-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .mh-orb-1 {
+      width: 520px; height: 520px;
+      top: -190px; right: -90px;
+      background: radial-gradient(circle, rgba(236,205,45,0.16), transparent 66%);
+    }
+
+    .mh-orb-2 {
+      width: 360px; height: 360px;
+      bottom: -110px; left: -70px;
+      background: radial-gradient(circle, rgba(236,205,45,0.09), transparent 68%);
+    }
+
+    .mh-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 75% 72% at 50% 45%, black, transparent);
+      opacity: 0.38;
+    }
+
+    .mimos-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 58px;
+      align-items: center;
+    }
+
+    .mimos-hero-text h1 {
+      font-size: clamp(2.7rem, 5.8vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+
+    .mimos-hero-text h1 em {
+      font-style: normal;
+      color: var(--yellow-dark);
+    }
+
+    .mimos-hero-text p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .mimos-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .mimos-hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .mimos-hero-points span,
+    .mimos-trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    html:not(.dark-mode) .mimos-hero-points span,
+    html:not(.dark-mode) .mimos-trust-pill {
+      background: #fff;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.06);
+    }
+
+    .mimos-hero-card-wrap {
+      position: relative;
+    }
+
+    .mimos-hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 36px;
+      border: 1px solid rgba(236,205,45,0.34);
+      background: var(--bg-card);
+      box-shadow: 0 34px 80px rgba(0,0,0,0.16), 0 0 0 1px rgba(236,205,45,0.10);
+      padding: 12px;
+    }
+
+    html:not(.dark-mode) .mimos-hero-card {
+      background: #fff;
+      box-shadow: 0 34px 80px rgba(0,0,0,0.10), 0 8px 22px rgba(0,0,0,0.06);
+    }
+
+    .mimos-hero-card img {
+      display: block;
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 28px;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .mimos-hero-overlay {
+      position: absolute;
+      left: 28px; right: 28px; bottom: 28px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+      border: 1px solid rgba(236,205,45,0.26);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.20);
+    }
+
+    .mimos-hero-overlay strong {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+
+    .mimos-hero-overlay span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .mimos-float-card {
+      position: absolute;
+      top: 26px;
+      left: -28px;
+      min-width: 148px;
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      z-index: 3;
+      animation: mimos-float 4s ease-in-out infinite;
+    }
+
+    html:not(.dark-mode) .mimos-float-card { background: rgba(255,255,255,0.96); }
+
+    .mimos-float-card small {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
+    .mimos-float-card strong {
+      color: var(--yellow-dark);
+      font-size: 1.05rem;
+      letter-spacing: -0.04em;
+    }
+
+    @keyframes mimos-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--yellow-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow-dark);
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(236,205,45,0.55);
+    }
+
+    .mimos-how {
+      padding: 62px 0 34px;
+    }
+
+    .mimos-how-box {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+      border-radius: 34px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .mimos-how-box {
+      background: linear-gradient(135deg, #fff 0%, #fffdf4 100%);
+      border-color: rgba(20,20,20,0.12);
+    }
+
+    .mimos-how-main {
+      padding: 34px;
+      background: radial-gradient(circle at top left, rgba(236,205,45,0.12), transparent 56%);
+    }
+
+    .mimos-how-main h2,
+    .mimos-section-head h2,
+    .mimos-thanks h2 {
+      color: var(--text);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+      margin-bottom: 14px;
+    }
+
+    .mimos-how-main p,
+    .mimos-section-head p,
+    .mimos-thanks p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .mimos-how-steps {
+      display: grid;
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .mimos-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg-card) 86%, transparent);
+    }
+
+    html:not(.dark-mode) .mimos-step { background: rgba(255,255,255,0.78); }
+
+    .mimos-step-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #1b1704;
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+
+    .mimos-step strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.98rem;
+      margin-bottom: 3px;
+    }
+
+    .mimos-step span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .mimos-shop {
+      padding: 72px 0 84px;
+    }
+
+    .mimos-section-head {
+      text-align: center;
+      max-width: 660px;
+      margin: 0 auto 36px;
+    }
+
+    .mimos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .mimo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    html:not(.dark-mode) .mimo-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf6 100%);
+      border-color: rgba(20,20,20,0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .mimo-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(236,205,45,0.45);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.16);
+    }
+
+    .mimo-media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      overflow: hidden;
+      background: var(--yellow-soft);
+      flex-shrink: 0;
+    }
+
+    .mimo-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: saturate(0.9) contrast(1.02);
+      transform: scale(1.02);
+    }
+
+    .mimo-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.42) 100%),
+        radial-gradient(circle at top right, rgba(236,205,45,0.25), transparent 48%);
+    }
+
+    .mimo-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      z-index: 2;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.88);
+      color: #7d6516;
+      font-weight: 900;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .mimo-icon {
+      position: absolute;
+      right: 16px; bottom: 14px;
+      z-index: 2;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      font-size: 1.2rem;
+    }
+
+    .mimo-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mimo-topline {
+      display: block;
+      margin-bottom: 12px;
+      min-width: 0;
+    }
+
+    .mimo-topline h3 {
+      color: var(--text);
+      font-size: 1.12rem;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+      margin-bottom: 8px;
+    }
+
+    .mimo-price {
+      display: block;
+      color: var(--yellow-dark);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+      font-size: 1.08rem;
+    }
+
+    .mimo-body p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.58;
+      margin-bottom: 18px;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+    }
+
+    .mimo-mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mimo-mini-list span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--yellow-soft);
+      color: var(--yellow-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .mimo-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .mimo-card .btn {
+      width: 100%;
+      justify-content: center;
+      padding-inline: 14px;
+    }
+
+    .mimos-trust {
+      padding: 0 0 84px;
+    }
+
+    .mimos-thanks {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 42px;
+      text-align: center;
+      border: 1px solid rgba(236,205,45,0.28);
+      background:
+        radial-gradient(circle at top left, rgba(236,205,45,0.16), transparent 46%),
+        var(--bg-card);
+      box-shadow: var(--shadow);
+    }
+
+    html:not(.dark-mode) .mimos-thanks {
+      background:
+        radial-gradient(circle at top left, rgba(236,205,45,0.16), transparent 46%),
+        #fff;
+    }
+
+    .mimos-trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .mimo-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(4, 5, 8, 0.78);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.24s ease, visibility 0.24s ease;
+    }
+
+    .mimo-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mimo-modal {
+      position: relative;
+      width: min(960px, 100%);
+      max-height: min(92vh, 980px);
+      overflow: auto;
+      border-radius: 34px;
+      border: 1px solid rgba(236,205,45,0.28);
+      background:
+        radial-gradient(circle at top left, rgba(236,205,45,0.16), transparent 34%),
+        linear-gradient(145deg, rgba(24,25,30,0.98), rgba(8,9,12,0.98));
+      box-shadow: 0 34px 100px rgba(0,0,0,0.58), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      color: #fff;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.24s ease;
+    }
+
+    .mimo-modal-overlay.active .mimo-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .mimo-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .mimo-modal-close:hover {
+      background: rgba(236,205,45,0.16);
+      border-color: rgba(236,205,45,0.42);
+      transform: rotate(90deg);
+    }
+
+    .mimo-modal-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: 0;
+      min-height: 620px;
+    }
+
+    .mimo-modal-media {
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      background:
+        radial-gradient(circle at 50% 32%, rgba(236,205,45,0.17), transparent 48%),
+        rgba(255,255,255,0.03);
+    }
+
+    .mimo-modal-media-frame {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(236,205,45,0.24);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.38);
+      background: rgba(236,205,45,0.10);
+    }
+
+    .mimo-modal-media-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+      filter: saturate(0.96) contrast(1.04);
+    }
+
+    .mimo-modal-info {
+      padding: 46px 42px 36px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mimo-modal-kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 16px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(236,205,45,0.13);
+      color: #fff3a3;
+      border: 1px solid rgba(236,205,45,0.22);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .mimo-modal-info h2 {
+      padding-right: 28px;
+      color: #fff;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+      margin-bottom: 12px;
+    }
+
+    .mimo-modal-subtitle {
+      color: rgba(255,255,255,0.68);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+
+    .mimo-modal-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .mimo-modal-detail {
+      padding: 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .mimo-modal-detail small {
+      display: block;
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .mimo-modal-detail strong {
+      color: #fff;
+      font-size: 0.98rem;
+      line-height: 1.25;
+    }
+
+    .mimo-modal-detail .price {
+      color: #eccd2d;
+      font-size: 1.22rem;
+      letter-spacing: -0.04em;
+    }
+
+    .mimo-modal-reason {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(236,205,45,0.24);
+      background: linear-gradient(135deg, rgba(236,205,45,0.13), rgba(255,255,255,0.045));
+      margin-bottom: 24px;
+    }
+
+    .mimo-modal-reason small {
+      display: block;
+      margin-bottom: 7px;
+      color: #fff3a3;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .mimo-modal-reason p {
+      color: rgba(255,255,255,0.84);
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .mimo-modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .mimo-modal-actions .btn {
+      justify-content: center;
+      min-height: 52px;
+    }
+
+    .mimo-site-disabled {
+      opacity: 0.48;
+      pointer-events: none;
+    }
+
+    body.mimo-modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 1040px) {
+      .mimos-hero-inner,
+      .mimos-how-box {
+        grid-template-columns: 1fr;
+      }
+
+      .mimos-hero-text {
+        text-align: center;
+      }
+
+      .mimos-hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .mimos-hero-actions,
+      .mimos-hero-points {
+        justify-content: center;
+      }
+
+      .mimos-hero-card-wrap {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .mimos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .mimo-modal-content {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      .mimo-modal-media {
+        padding: 26px 22px 0;
+      }
+
+      .mimo-modal-media-frame {
+        max-width: 340px;
+      }
+
+      .mimo-modal-info {
+        padding: 28px 22px 24px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .mimos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mimo-modal-overlay {
+        align-items: end;
+        padding: 12px;
+      }
+
+      .mimo-modal {
+        width: 100%;
+        max-height: 94vh;
+        border-radius: 28px;
+      }
+
+      .mimo-modal-close {
+        top: 14px;
+        right: 14px;
+      }
+
+      .mimo-modal-details,
+      .mimo-modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .mimo-modal-info h2 {
+        padding-right: 42px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .mimos-hero {
+        padding: 54px 0 48px;
+      }
+
+      .mimos-hero-card img {
+        height: 420px;
+      }
+
+      .mimos-float-card {
+        left: 14px;
+      }
+
+      .mimo-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .mimos-how-main,
+      .mimos-how-steps,
+      .mimos-thanks {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="header">
+    <div class="container nav">
+      <div class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="SobreMim.html">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html" class="ativo" aria-current="page">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu-panel" id="mobileMenuPanel" aria-label="Menu mobile" aria-hidden="true">
+      <a href="index.html">Início</a>
+      <a href="SobreMim.html">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html" aria-current="page">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+    <section class="mimos-hero" aria-labelledby="mimos-hero-titulo">
+      <div class="mimos-hero-bg" aria-hidden="true">
+        <div class="mh-orb mh-orb-1"></div>
+        <div class="mh-orb mh-orb-2"></div>
+        <div class="mh-grid"></div>
+      </div>
+
+      <div class="container mimos-hero-inner">
+        <div class="mimos-hero-text">
+          <span class="hero-pill">♡ Presentes para Sofis</span>
+          <h1 id="mimos-hero-titulo">Escolha um <em>mimo</em> e transforme carinho em presente.</h1>
+          <p>
+            Uma vitrine delicada, premium e direta para presentear a Sofis com itens especiais. Você escolhe o mimo, finaliza pelo checkout próprio e recebe uma mensagem personalizada de agradecimento.
+          </p>
+          <div class="mimos-hero-actions">
+            <a href="#vitrine" class="btn btn-primary">Ver mimos</a>
+            <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
+          </div>
+          <div class="mimos-hero-points" aria-label="Diferenciais">
+            <span>✦ Checkout exclusivo</span>
+            <span>♡ Agradecimento personalizado</span>
+            <span>⚡ Simples e discreto</span>
+          </div>
+        </div>
+
+        <div class="mimos-hero-card-wrap" aria-hidden="true">
+          <div class="mimos-float-card">
+            <small>Mimo favorito</small>
+            <strong>Corset Underbust</strong>
+          </div>
+          <div class="mimos-hero-card">
+            <img src="sofisa.jpg" alt="" width="560" height="700" />
+            <div class="mimos-hero-overlay">
+              <strong>Presenteie com estilo</strong>
+              <span>Um gesto fofo, sofisticado e lembrado com carinho.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mimos-how" id="como-funciona" aria-labelledby="mimos-how-titulo">
+      <div class="container">
+        <div class="mimos-how-box">
+          <div class="mimos-how-main">
+            <div class="section-badge"><span class="badge-dot" aria-hidden="true"></span> Como presentear</div>
+            <h2 id="mimos-how-titulo">Um checkout separado, feito só para mimos.</h2>
+            <p>
+              Cada presente abre o mesmo checkout de mimos com as informações certas: imagem, nome, preço e uma mensagem especial. Nada passa pelo checkout geral do site.
+            </p>
+          </div>
+
+          <div class="mimos-how-steps">
+            <div class="mimos-step">
+              <span class="mimos-step-num">1</span>
+              <div><strong>Escolha o mimo</strong><span>Veja os cards, compare o estilo e clique em Presentear.</span></div>
+            </div>
+            <div class="mimos-step">
+              <span class="mimos-step-num">2</span>
+              <div><strong>Confira o checkout</strong><span>O checkout-mimos carrega automaticamente o item escolhido.</span></div>
+            </div>
+            <div class="mimos-step">
+              <span class="mimos-step-num">3</span>
+              <div><strong>Finalize o presente</strong><span>Conclua o pagamento e envie sua intenção com carinho.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mimos-shop" id="vitrine" aria-labelledby="mimos-shop-titulo">
+      <div class="container">
+        <div class="mimos-section-head">
+          <div class="section-badge"><span class="badge-dot" aria-hidden="true"></span> Vitrine de mimos</div>
+          <h2 id="mimos-shop-titulo">Escolhas fofas, elegantes e especiais.</h2>
+          <p>Cards com imagem, preço e botão direto para o checkout exclusivo dos mimos.</p>
+        </div>
+
+        <div class="mimos-grid">
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Corset Underbust" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Mais desejado</span>
+              <span class="mimo-icon" aria-hidden="true">✦</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Corset Underbust</h3><span class="mimo-price">R$ 189,90</span></div>
+              <p>Peça marcante, elegante e perfeita para um visual premium.</p>
+              <div class="mimo-mini-list"><span>Elegante</span><span>Premium</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=corset-underbust" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=corset-underbust" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Vestido Premium" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Clássico</span>
+              <span class="mimo-icon" aria-hidden="true">♡</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Vestido Premium</h3><span class="mimo-price">R$ 249,90</span></div>
+              <p>Um presente sofisticado para criar memórias bonitas.</p>
+              <div class="mimo-mini-list"><span>Chique</span><span>Especial</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=vestido-premium" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=vestido-premium" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Lingerie Dourada" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Luxo</span>
+              <span class="mimo-icon" aria-hidden="true">✧</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Lingerie Dourada</h3><span class="mimo-price">R$ 159,90</span></div>
+              <p>Delicada, luminosa e com a cara da identidade dourada do Sofis Hub.</p>
+              <div class="mimo-mini-list"><span>Dourado</span><span>Fofo</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=lingerie-dourada" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=lingerie-dourada" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Salto Delicado" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Fashion</span>
+              <span class="mimo-icon" aria-hidden="true">★</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Salto Delicado</h3><span class="mimo-price">R$ 219,90</span></div>
+              <p>Um mimo elegante para completar produções especiais.</p>
+              <div class="mimo-mini-list"><span>Estilo</span><span>Look</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=salto-delicado" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=salto-delicado" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Perfume Assinatura" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Marcante</span>
+              <span class="mimo-icon" aria-hidden="true">❋</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Perfume Assinatura</h3><span class="mimo-price">R$ 179,90</span></div>
+              <p>Um presente íntimo, memorável e cheio de personalidade.</p>
+              <div class="mimo-mini-list"><span>Memória</span><span>Carinho</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=perfume-assinatura" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=perfume-assinatura" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card">
+            <div class="mimo-media">
+              <img src="sofisa.jpg" alt="Spa Day" loading="lazy" decoding="async" width="520" height="640" />
+              <span class="mimo-badge">Relax</span>
+              <span class="mimo-icon" aria-hidden="true">✺</span>
+            </div>
+            <div class="mimo-body">
+              <div class="mimo-topline"><h3>Spa Day</h3><span class="mimo-price">R$ 299,90</span></div>
+              <p>Um dia de cuidado, descanso e energia boa.</p>
+              <div class="mimo-mini-list"><span>Cuidado</span><span>Especial</span></div>
+              <div class="mimo-actions">
+                <a href="checkout-mimos.html?produto=spa-day" class="btn btn-secondary">Detalhes</a>
+                <a href="checkout-mimos.html?produto=spa-day" class="btn btn-primary">Presentear</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Buquê de Rosas" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Romântico</span><span class="mimo-icon" aria-hidden="true">❀</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Buquê de Rosas</h3><span class="mimo-price">R$ 129,90</span></div><p>Flores delicadas para transformar carinho em presença.</p><div class="mimo-mini-list"><span>Flores</span><span>Carinho</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=buque-rosas" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=buque-rosas" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Joia Delicada" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Brilho</span><span class="mimo-icon" aria-hidden="true">✧</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Joia Delicada</h3><span class="mimo-price">R$ 199,90</span></div><p>Um detalhe elegante para guardar como lembrança especial.</p><div class="mimo-mini-list"><span>Joia</span><span>Elegante</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=joia-delicada" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=joia-delicada" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Bolsa Mini" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Tendência</span><span class="mimo-icon" aria-hidden="true">◈</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Bolsa Mini</h3><span class="mimo-price">R$ 229,90</span></div><p>Um acessório charmoso, moderno e fácil de amar.</p><div class="mimo-mini-list"><span>Fashion</span><span>Premium</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=bolsa-mini" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=bolsa-mini" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Pijama de Cetim" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Conforto</span><span class="mimo-icon" aria-hidden="true">☾</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Pijama de Cetim</h3><span class="mimo-price">R$ 149,90</span></div><p>Um mimo macio, confortável e com toque sofisticado.</p><div class="mimo-mini-list"><span>Cetim</span><span>Fofo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=pijama-cetim" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=pijama-cetim" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Kit Make Glow" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Glam</span><span class="mimo-icon" aria-hidden="true">✦</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Kit Make Glow</h3><span class="mimo-price">R$ 189,90</span></div><p>Um kit de beleza para realçar ainda mais o brilho.</p><div class="mimo-mini-list"><span>Make</span><span>Beleza</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=kit-make-glow" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=kit-make-glow" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Jantar Especial" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Date</span><span class="mimo-icon" aria-hidden="true">♡</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Jantar Especial</h3><span class="mimo-price">R$ 349,90</span></div><p>Uma experiência gostosa para criar uma memória linda.</p><div class="mimo-mini-list"><span>Experiência</span><span>Premium</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=jantar-especial" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=jantar-especial" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Unhas Premium" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Beleza</span><span class="mimo-icon" aria-hidden="true">✺</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Unhas Premium</h3><span class="mimo-price">R$ 89,90</span></div><p>Um cuidado delicado que deixa tudo mais bonito.</p><div class="mimo-mini-list"><span>Cuidado</span><span>Mimo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=unhas-premium" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=unhas-premium" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Cabelo no Salão" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Glow</span><span class="mimo-icon" aria-hidden="true">✧</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Cabelo no Salão</h3><span class="mimo-price">R$ 199,90</span></div><p>Um presente de autoestima para um dia de salão completo.</p><div class="mimo-mini-list"><span>Beleza</span><span>Autoestima</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=cabelo-salao" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=cabelo-salao" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Skincare Luxo" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Skin Care</span><span class="mimo-icon" aria-hidden="true">❋</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Skincare Luxo</h3><span class="mimo-price">R$ 169,90</span></div><p>Cuidados especiais para uma rotina mais elegante.</p><div class="mimo-mini-list"><span>Cuidado</span><span>Luxo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=skincare-luxo" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=skincare-luxo" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Chocolatinhos" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Doce</span><span class="mimo-icon" aria-hidden="true">♡</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Chocolatinhos</h3><span class="mimo-price">R$ 79,90</span></div><p>Um mimo simples, fofo e impossível de não amar.</p><div class="mimo-mini-list"><span>Fofo</span><span>Delícia</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=chocolatinhos" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=chocolatinhos" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Pelúcia Fofa" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Fofo</span><span class="mimo-icon" aria-hidden="true">☁</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Pelúcia Fofa</h3><span class="mimo-price">R$ 99,90</span></div><p>Um carinho macio para ficar por perto.</p><div class="mimo-mini-list"><span>Carinho</span><span>Soft</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=pelucia-fofa" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=pelucia-fofa" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Livro de Romance" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Delicado</span><span class="mimo-icon" aria-hidden="true">✧</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Livro de Romance</h3><span class="mimo-price">R$ 69,90</span></div><p>Uma escolha calma, íntima e cheia de charme.</p><div class="mimo-mini-list"><span>Romance</span><span>Calma</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=livro-romance" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=livro-romance" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Café Mimoso" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Morning</span><span class="mimo-icon" aria-hidden="true">☕</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Café Mimoso</h3><span class="mimo-price">R$ 59,90</span></div><p>Um café especial para começar o dia com carinho.</p><div class="mimo-mini-list"><span>Café</span><span>Fofo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=cafe-mimoso" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=cafe-mimoso" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Look Casual" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Casual</span><span class="mimo-icon" aria-hidden="true">★</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Look Casual</h3><span class="mimo-price">R$ 189,90</span></div><p>Uma peça versátil para o dia a dia com estilo.</p><div class="mimo-mini-list"><span>Look</span><span>Dia</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=look-casual" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=look-casual" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Saia Premium" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Fashion</span><span class="mimo-icon" aria-hidden="true">✦</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Saia Premium</h3><span class="mimo-price">R$ 139,90</span></div><p>Um mimo feminino, bonito e fácil de combinar.</p><div class="mimo-mini-list"><span>Estilo</span><span>Feminino</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=saia-premium" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=saia-premium" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Cropped Delicado" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Básico</span><span class="mimo-icon" aria-hidden="true">♡</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Cropped Delicado</h3><span class="mimo-price">R$ 119,90</span></div><p>Uma peça charmosa para looks leves e fofos.</p><div class="mimo-mini-list"><span>Look</span><span>Fofo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=cropped-delicado" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=cropped-delicado" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Body de Renda" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Renda</span><span class="mimo-icon" aria-hidden="true">✧</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Body de Renda</h3><span class="mimo-price">R$ 169,90</span></div><p>Delicado, elegante e com um toque premium.</p><div class="mimo-mini-list"><span>Delicado</span><span>Chique</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=body-renda" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=body-renda" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Robe de Cetim" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Cetim</span><span class="mimo-icon" aria-hidden="true">☾</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Robe de Cetim</h3><span class="mimo-price">R$ 179,90</span></div><p>Um presente confortável com visual sofisticado.</p><div class="mimo-mini-list"><span>Conforto</span><span>Luxo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=robe-cetim" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=robe-cetim" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Banho Premium" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Relax</span><span class="mimo-icon" aria-hidden="true">✺</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Banho Premium</h3><span class="mimo-price">R$ 129,90</span></div><p>Um kit de banho para um momento de autocuidado.</p><div class="mimo-mini-list"><span>Banho</span><span>Cuidado</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=banho-premium" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=banho-premium" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Assinatura Música" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Leve</span><span class="mimo-icon" aria-hidden="true">♫</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Assinatura Música</h3><span class="mimo-price">R$ 39,90</span></div><p>Um mimo simples para deixar a rotina mais gostosa.</p><div class="mimo-mini-list"><span>Música</span><span>Carinho</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=assinatura-musica" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=assinatura-musica" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Cinema Date" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Date</span><span class="mimo-icon" aria-hidden="true">🎬</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Cinema Date</h3><span class="mimo-price">R$ 89,90</span></div><p>Um momento fofo para assistir algo especial.</p><div class="mimo-mini-list"><span>Filme</span><span>Fofo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=cinema-date" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=cinema-date" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Viagem Curta" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Sonho</span><span class="mimo-icon" aria-hidden="true">✈</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Viagem Curta</h3><span class="mimo-price">R$ 499,90</span></div><p>Uma experiência memorável para sair da rotina.</p><div class="mimo-mini-list"><span>Experiência</span><span>Luxo</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=viagem-curta" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=viagem-curta" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Ensaio de Fotos" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Glow</span><span class="mimo-icon" aria-hidden="true">✦</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Ensaio de Fotos</h3><span class="mimo-price">R$ 399,90</span></div><p>Um presente para registrar beleza e autoestima.</p><div class="mimo-mini-list"><span>Fotos</span><span>Premium</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=ensaio-fotos" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=ensaio-fotos" class="btn btn-primary">Presentear</a></div></div></article>
+          <article class="mimo-card"><div class="mimo-media"><img src="sofisa.jpg" alt="Mimo Surpresa" loading="lazy" decoding="async" width="520" height="640" /><span class="mimo-badge">Surpresa</span><span class="mimo-icon" aria-hidden="true">✷</span></div><div class="mimo-body"><div class="mimo-topline"><h3>Mimo Surpresa</h3><span class="mimo-price">R$ 150,00</span></div><p>Você escolhe o valor e deixa a surpresa acontecer.</p><div class="mimo-mini-list"><span>Especial</span><span>Livre</span></div><div class="mimo-actions"><a href="checkout-mimos.html?produto=mimo-surpresa" class="btn btn-secondary">Detalhes</a><a href="checkout-mimos.html?produto=mimo-surpresa" class="btn btn-primary">Presentear</a></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mimos-trust" aria-labelledby="mimos-trust-titulo">
+      <div class="container">
+        <div class="mimos-thanks">
+          <div class="section-badge"><span class="badge-dot" aria-hidden="true"></span> Obrigada pelo carinho</div>
+          <h2 id="mimos-trust-titulo">Cada mimo vira uma lembrança especial.</h2>
+          <p>Ao presentear, você apoia diretamente a Sofis e recebe um agradecimento personalizado no checkout.</p>
+          <div class="mimos-trust-row">
+            <span class="mimos-trust-pill">♡ Mensagem personalizada</span>
+            <span class="mimos-trust-pill">✦ Checkout seguro</span>
+            <span class="mimos-trust-pill">⚡ Retorno rápido</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="mimo-modal-overlay" id="mimoModalOverlay" aria-hidden="true">
+      <article class="mimo-modal" role="dialog" aria-modal="true" aria-labelledby="mimoModalTitle" tabindex="-1">
+        <button type="button" class="mimo-modal-close" id="mimoModalClose" aria-label="Fechar detalhes">X</button>
+        <div class="mimo-modal-content">
+          <div class="mimo-modal-media">
+            <div class="mimo-modal-media-frame">
+              <img id="mimoModalImage" src="sofisa.jpg" alt="" width="520" height="640" />
+            </div>
+          </div>
+          <div class="mimo-modal-info">
+            <span class="mimo-modal-kicker" id="mimoModalPriority">Prioridade</span>
+            <h2 id="mimoModalTitle">Nome do produto</h2>
+            <p class="mimo-modal-subtitle">Detalhes do presente que eu adoraria ganhar</p>
+
+            <div class="mimo-modal-details" aria-label="Informações do presente">
+              <div class="mimo-modal-detail">
+                <small>Categoria</small>
+                <strong id="mimoModalCategory">Categoria</strong>
+              </div>
+              <div class="mimo-modal-detail">
+                <small>Valor</small>
+                <strong class="price" id="mimoModalPrice">R$ 0,00</strong>
+              </div>
+              <div class="mimo-modal-detail">
+                <small>Prioridade</small>
+                <strong id="mimoModalPriorityDetail">Prioridade</strong>
+              </div>
+              <div class="mimo-modal-detail">
+                <small>Produto</small>
+                <strong id="mimoModalProductLabel">Mimo especial</strong>
+              </div>
+            </div>
+
+            <div class="mimo-modal-reason">
+              <small>Motivo de querer</small>
+              <p id="mimoModalReason">Motivo do presente.</p>
+            </div>
+
+            <div class="mimo-modal-actions">
+              <a href="#" class="btn btn-secondary" id="mimoModalSite" target="_blank" rel="noopener">Ver no Site</a>
+              <a href="#" class="btn btn-primary" id="mimoModalGift">Presentear</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-logo">Sofis<span>Hub</span></p>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (() => {
+      const modalOverlay = document.getElementById("mimoModalOverlay");
+      const modal = modalOverlay?.querySelector(".mimo-modal");
+      const closeButton = document.getElementById("mimoModalClose");
+      const modalImage = document.getElementById("mimoModalImage");
+      const modalTitle = document.getElementById("mimoModalTitle");
+      const modalPriority = document.getElementById("mimoModalPriority");
+      const modalCategory = document.getElementById("mimoModalCategory");
+      const modalPrice = document.getElementById("mimoModalPrice");
+      const modalPriorityDetail = document.getElementById("mimoModalPriorityDetail");
+      const modalProductLabel = document.getElementById("mimoModalProductLabel");
+      const modalReason = document.getElementById("mimoModalReason");
+      const modalSite = document.getElementById("mimoModalSite");
+      const modalGift = document.getElementById("mimoModalGift");
+      let lastFocusedElement = null;
+
+      if (!modalOverlay || !modal) return;
+
+      const getProductId = (href) => {
+        try {
+          const url = new URL(href, window.location.href);
+          return url.searchParams.get("produto");
+        } catch (error) {
+          return null;
+        }
+      };
+
+      const getProductFromCard = (card, detailsLink) => {
+        const image = card.querySelector(".mimo-media img");
+        const category = card.querySelector(".mimo-mini-list span");
+        const badge = card.querySelector(".mimo-badge");
+        const id = getProductId(detailsLink.href);
+
+        return {
+          id,
+          name: card.querySelector(".mimo-topline h3")?.textContent.trim() || image?.alt || "Mimo especial",
+          image: image?.getAttribute("src") || "sofisa.jpg",
+          imageAlt: image?.getAttribute("alt") || "Mimo especial",
+          category: detailsLink.dataset.category || category?.textContent.trim() || "Mimo premium",
+          price: card.querySelector(".mimo-price")?.textContent.trim() || "Valor sob consulta",
+          priority: detailsLink.dataset.priority || badge?.textContent.trim() || "Especial",
+          reason: detailsLink.dataset.reason || card.querySelector(".mimo-body p")?.textContent.trim() || "Um presente que eu adoraria ganhar com muito carinho.",
+          site: detailsLink.dataset.site || ""
+        };
+      };
+
+      const setSiteButton = (siteUrl) => {
+        if (!siteUrl) {
+          modalSite.href = "#";
+          modalSite.classList.add("mimo-site-disabled");
+          modalSite.setAttribute("aria-disabled", "true");
+          modalSite.setAttribute("tabindex", "-1");
+          return;
+        }
+
+        modalSite.href = siteUrl;
+        modalSite.classList.remove("mimo-site-disabled");
+        modalSite.removeAttribute("aria-disabled");
+        modalSite.removeAttribute("tabindex");
+      };
+
+      const openModal = (product) => {
+        if (!product.id) return;
+
+        lastFocusedElement = document.activeElement;
+        modalImage.src = product.image;
+        modalImage.alt = product.imageAlt;
+        modalTitle.textContent = product.name;
+        modalPriority.textContent = product.priority;
+        modalCategory.textContent = product.category;
+        modalPrice.textContent = product.price;
+        modalPriorityDetail.textContent = product.priority;
+        modalProductLabel.textContent = product.name;
+        modalReason.textContent = product.reason;
+        modalGift.href = `checkout-mimos.html?produto=${encodeURIComponent(product.id)}`;
+        setSiteButton(product.site);
+
+        modalOverlay.classList.add("active");
+        modalOverlay.setAttribute("aria-hidden", "false");
+        document.body.classList.add("mimo-modal-open");
+        modal.focus();
+      };
+
+      const closeModal = () => {
+        modalOverlay.classList.remove("active");
+        modalOverlay.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("mimo-modal-open");
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
+      };
+
+      document.querySelectorAll(".mimo-actions .btn-secondary").forEach((detailsLink) => {
+        detailsLink.addEventListener("click", (event) => {
+          const card = detailsLink.closest(".mimo-card");
+          if (!card) return;
+
+          event.preventDefault();
+          openModal(getProductFromCard(card, detailsLink));
+        });
+      });
+
+      closeButton?.addEventListener("click", closeModal);
+
+      modalOverlay.addEventListener("click", (event) => {
+        if (event.target === modalOverlay) closeModal();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modalOverlay.classList.contains("active")) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

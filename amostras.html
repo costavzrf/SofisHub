@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Amostras</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.classList.add("dark-mode");
+    })();
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    html.dark-mode { background: #08090c; }
+    body { opacity: 0; visibility: hidden; }
+    html.page-ready body {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       AMOSTRAS — FYP FEED
+       Feed de tela cheia, scroll-snap vertical, 1 item/vez
+    ═══════════════════════════════════════════════════ */
+
+    /* ── HEADER OVERRIDE (transparente nesta página) ── */
+    .am-page .header {
+      position: fixed;
+      background: transparent !important;
+      border-bottom: none !important;
+      backdrop-filter: none !important;
+      transition: background 0.3s ease;
+      z-index: 900;
+    }
+    .am-page .header.scrolled {
+      background: rgba(8, 9, 12, 0.88) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+      backdrop-filter: blur(18px) !important;
+    }
+
+    /* ── HERO INTRO ─────────────────────────────────── */
+    .am-intro {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #08090c;
+    }
+
+    .am-intro-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .am-intro-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .am-intro-orb-1 {
+      width: 600px; height: 600px;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(212,160,23,0.12), transparent 65%);
+      animation: orb-drift 8s ease-in-out infinite;
+    }
+
+    .am-intro-orb-2 {
+      width: 350px; height: 350px;
+      bottom: -80px; left: -60px;
+      background: radial-gradient(circle, rgba(212,160,23,0.07), transparent 65%);
+      animation: orb-drift 10s ease-in-out infinite reverse;
+    }
+
+    .am-intro-orb-3 {
+      width: 280px; height: 280px;
+      top: 30%; right: -40px;
+      background: radial-gradient(circle, rgba(212,160,23,0.06), transparent 65%);
+      animation: orb-drift 12s ease-in-out infinite;
+    }
+
+    @keyframes orb-drift {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.15); }
+    }
+
+    .am-intro-orb-2, .am-intro-orb-3 {
+      animation-name: orb-drift-free;
+    }
+
+    @keyframes orb-drift-free {
+      0%, 100% { transform: scale(1) translate(0,0); }
+      33% { transform: scale(1.1) translate(10px,-12px); }
+      66% { transform: scale(0.95) translate(-8px, 8px); }
+    }
+
+    .am-intro-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+    }
+
+    .am-intro-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      padding: 0 24px;
+    }
+
+    .am-intro-content .hero-pill {
+      animation: fade-up 0.6s ease both;
+    }
+
+    .am-intro-content h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      letter-spacing: -0.065em;
+      line-height: 0.97;
+      margin: 14px 0 18px;
+      color: #ede9df;
+      animation: fade-up 0.7s 0.1s ease both;
+    }
+
+    .am-intro-content h1 em {
+      font-style: normal;
+      color: var(--yellow-dark);
+    }
+
+    .am-intro-content p {
+      color: #7a7570;
+      font-size: 1.06rem;
+      margin-bottom: 34px;
+      line-height: 1.68;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fade-up 0.7s 0.18s ease both;
+    }
+
+    .am-intro-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fade-up 0.7s 0.26s ease both;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll hint */
+    .am-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: fade-up 0.7s 0.4s ease both;
+    }
+
+    .am-scroll-arrow {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      animation: bounce-down 1.8s ease-in-out infinite;
+    }
+
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+
+    /* ── FEED WRAPPER — palco de tela cheia ────────────
+       No desktop: fundo escuro + story centralizado 9:16
+       No mobile: story ocupa 100% da tela (comportamento atual)
+    ──────────────────────────────────────────────────── */
+    .am-feed-stage {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #08090c;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    /* Painéis laterais escuros (desktop) */
+    .am-feed-side {
+      flex: 1;
+      background: #08090c;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Efeito de brilho sutil nas laterais */
+    .am-feed-side-left::after,
+    .am-feed-side-right::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 50%,
+        rgba(212,160,23,0.04), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Sugestão de próximo item na lateral — ghost desfocado */
+    .am-feed-side-left .am-side-ghost,
+    .am-feed-side-right .am-side-ghost {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      filter: blur(24px) brightness(0.25) saturate(0.3);
+      transform: scale(1.1);
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    /* Coluna central — o story de fato */
+    .am-feed-center {
+      /* Largura máxima do story: proporção 9:16 da viewport height */
+      width: min(calc(100vh * 9 / 16), 420px);
+      flex-shrink: 0;
+      height: 100vh;
+      position: relative;
+      /* Scroll snap vive aqui dentro */
+      overflow-y: scroll;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      /* Sombra lateral para destacar do fundo */
+      box-shadow:
+        -20px 0 60px rgba(0,0,0,0.5),
+         20px 0 60px rgba(0,0,0,0.5);
+    }
+
+    .am-feed-center::-webkit-scrollbar { display: none; }
+
+    /* Em mobile: sem painéis laterais — story 100vw */
+    @media (max-width: 640px) {
+      .am-feed-stage { display: block; }
+      .am-feed-side  { display: none; }
+      .am-feed-center {
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    /* ── ITEM DO FEED ───────────────────────────────── */
+    .am-item {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+      background: #08090c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Fundo por item (gradientes únicos) */
+    .am-item:nth-child(1)  { --item-hue: rgba(212,160,23,0.22); }
+    .am-item:nth-child(2)  { --item-hue: rgba(200,80,160,0.18); }
+    .am-item:nth-child(3)  { --item-hue: rgba(80,160,212,0.17); }
+    .am-item:nth-child(4)  { --item-hue: rgba(212,160,23,0.24); }
+    .am-item:nth-child(5)  { --item-hue: rgba(160,80,200,0.17); }
+    .am-item:nth-child(6)  { --item-hue: rgba(80,200,160,0.15); }
+    .am-item:nth-child(7)  { --item-hue: rgba(212,140,23,0.22); }
+    .am-item:nth-child(8)  { --item-hue: rgba(200,100,80,0.17); }
+
+    /* ── MÍDIA (vídeo ou foto) ──────────────────────── */
+    .am-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Placeholder visual quando não há mídia real */
+    .am-media-placeholder {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .am-media-placeholder::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, var(--item-hue), transparent 60%),
+        linear-gradient(170deg, #0e0f14 0%, #08090c 50%, #0c0d10 100%);
+    }
+
+    .am-media-placeholder::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.08;
+    }
+
+    /* Emoji flutuante central (placeholder de conteúdo) */
+    .am-media-icon {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(4rem, 10vw, 7rem);
+      filter: drop-shadow(0 0 60px var(--item-hue));
+      animation: icon-breathe 4s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes icon-breathe {
+      0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 60px var(--item-hue)); }
+      50% { transform: scale(1.06) translateY(-12px); filter: drop-shadow(0 0 90px var(--item-hue)); }
+    }
+
+    .am-media video,
+    .am-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* ── OVERLAY BLUR (trava conteúdo) ─────────────── */
+    .am-lock-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      backdrop-filter: blur(22px) brightness(0.45) saturate(0.4);
+      transition: opacity 0.5s ease;
+    }
+
+    .am-item.unlocked .am-lock-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── BARRA DE PROGRESSO ─────────────────────────── */
+    .am-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0; right: 0;
+      height: 2.5px;
+      background: rgba(255,255,255,0.15);
+      z-index: 20;
+    }
+
+    .am-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f5d96a, #d4a017);
+      border-radius: 0 2px 2px 0;
+      transition: width 0.1s linear;
+    }
+
+    .am-item.active .am-progress-fill {
+      animation: progress-run var(--item-duration, 8s) linear forwards;
+    }
+
+    @keyframes progress-run {
+      0%   { width: 0%; }
+      100% { width: 60%; }
+    }
+
+    /* ── BARRA SUPERIOR (tipo IG Stories) ──────────── */
+    .am-stories-bar {
+      position: absolute;
+      top: 12px;
+      left: 16px; right: 16px;
+      z-index: 20;
+      display: flex;
+      gap: 4px;
+    }
+
+    .am-stories-dot {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .am-stories-dot-fill {
+      height: 100%;
+      width: 0%;
+      background: rgba(255,255,255,0.9);
+      border-radius: 999px;
+    }
+
+    .am-stories-dot.done .am-stories-dot-fill { width: 100%; }
+
+    .am-stories-dot.current .am-stories-dot-fill {
+      animation: seg-run var(--item-duration, 8s) linear forwards;
+    }
+
+    @keyframes seg-run {
+      from { width: 0%; }
+      to   { width: 60%; }
+    }
+
+    /* ── PILL TIPO (foto / vídeo) ───────────────────── */
+    .am-type-pill {
+      position: absolute;
+      top: 28px;
+      right: 16px;
+      z-index: 21;
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .am-type-pill.video {
+      background: rgba(212,160,23,0.18);
+      border-color: rgba(212,160,23,0.4);
+      color: #d4a017;
+    }
+
+    /* ── LADO DIREITO: AÇÕES ────────────────────────── */
+    .am-actions {
+      position: absolute;
+      right: 16px;
+      bottom: 160px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .am-action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .am-action-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      color: #fff;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .am-action-btn:hover .am-action-icon,
+    .am-action-btn:focus .am-action-icon {
+      background: rgba(212,160,23,0.22);
+      border-color: rgba(212,160,23,0.45);
+      transform: scale(1.1);
+    }
+
+    .am-action-btn.liked .am-action-icon {
+      background: rgba(212,160,23,0.18);
+      border-color: rgba(212,160,23,0.5);
+      color: #d4a017;
+    }
+
+    .am-action-count {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 700;
+    }
+
+    /* ── RODAPÉ DO ITEM ─────────────────────────────── */
+    .am-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 72px; /* espaço para os botões de ação */
+      z-index: 20;
+      padding: 80px 18px 28px;
+      background: linear-gradient(to top,
+        rgba(0,0,0,0.88) 0%,
+        rgba(0,0,0,0.45) 55%,
+        transparent 100%);
+    }
+
+    .am-item-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 8px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f5d96a, #d4a017);
+      color: #1a0f00;
+      font-size: 0.71rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .am-item-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .am-item-desc {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .am-item-stats {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .am-item-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 600;
+    }
+
+    /* ── BOTÃO DESBLOQUEAR ──────────────────────────── */
+    .am-unlock-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f5d96a 0%, #d4a017 50%, #b8880a 100%);
+      color: #1a0f00;
+      font-size: 0.88rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 20px rgba(180,130,10,0.35);
+      width: 100%;
+      justify-content: center;
+    }
+
+    .am-unlock-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(180,130,10,0.45);
+    }
+
+    /* ── CADEADO CENTRAL ────────────────────────────── */
+    .am-lock-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .am-lock-bubble {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(212,160,23,0.4);
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      box-shadow:
+        0 0 30px rgba(212,160,23,0.15),
+        0 8px 24px rgba(0,0,0,0.4);
+      animation: lock-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes lock-pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(212,160,23,0.15), 0 8px 24px rgba(0,0,0,0.4); }
+      50% { box-shadow: 0 0 50px rgba(212,160,23,0.28), 0 8px 24px rgba(0,0,0,0.4); }
+    }
+
+    .am-lock-text {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── SCAN LINE ──────────────────────────────────── */
+    .am-scan {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(212,160,23,0.25) 30%,
+        rgba(212,160,23,0.5) 50%,
+        rgba(212,160,23,0.25) 70%,
+        transparent 100%);
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .am-item.active .am-scan {
+      opacity: 1;
+      animation: scan-run 3s linear infinite;
+    }
+
+    @keyframes scan-run {
+      0%   { top: 5%; }
+      100% { top: 95%; }
+    }
+
+    /* ── NAVEGAÇÃO: SETAS (dentro do painel direito) ── */
+    .am-nav-arrows {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .am-nav-arrow {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      transition: 0.2s ease;
+    }
+
+    .am-nav-arrow:hover {
+      background: rgba(212,160,23,0.2);
+      border-color: rgba(212,160,23,0.4);
+      color: #d4a017;
+    }
+
+    .am-nav-arrow:disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    /* ── CONTADOR ───────────────────────────────────── */
+    .am-counter {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .am-counter-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #d4a017;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Em mobile: setas e contador ficam sobre o feed */
+    @media (max-width: 640px) {
+      .am-nav-arrows {
+        position: fixed;
+        right: 14px;
+        bottom: 160px;
+        top: auto;
+        transform: none;
+        flex-direction: column;
+      }
+      .am-counter {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── MODAL DE DESBLOQUEIO ───────────────────────── */
+    .am-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.25s ease;
+    }
+
+    .am-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .am-modal {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 28px;
+      background: #111316;
+      border: 1px solid rgba(212,160,23,0.22);
+      box-shadow:
+        0 40px 90px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(212,160,23,0.08);
+      overflow: hidden;
+      transform: scale(0.9) translateY(24px);
+      transition: transform 0.32s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .am-modal-backdrop.open .am-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .am-modal-top {
+      height: 180px;
+      position: relative;
+      background: linear-gradient(135deg, #0e0f14, #1a1408);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .am-modal-top-orb {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(212,160,23,0.18), transparent 60%);
+      animation: orb-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes orb-pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .am-modal-icon {
+      position: relative;
+      z-index: 1;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212,160,23,0.4);
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+      box-shadow: 0 0 30px rgba(212,160,23,0.22);
+    }
+
+    .am-modal-close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: 0.2s ease;
+      z-index: 2;
+    }
+
+    .am-modal-close:hover { background: rgba(0,0,0,0.85); }
+
+    .am-modal-body { padding: 24px; }
+
+    .am-modal-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #ede9df;
+      margin-bottom: 5px;
+    }
+
+    .am-modal-sub {
+      font-size: 0.86rem;
+      color: #7a7570;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .am-modal-opts { display: flex; flex-direction: column; gap: 10px; }
+
+    .am-modal-opt {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 13px 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      text-decoration: none;
+      color: #ede9df;
+      transition: 0.2s ease;
+    }
+
+    .am-modal-opt:hover {
+      border-color: rgba(212,160,23,0.35);
+      background: rgba(212,160,23,0.07);
+    }
+
+    .am-modal-opt-icon {
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      background: rgba(212,160,23,0.1);
+      flex-shrink: 0;
+    }
+
+    .am-modal-opt-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .am-modal-opt-sub {
+      font-size: 0.75rem;
+      color: #7a7570;
+      margin-top: 2px;
+    }
+
+    .am-modal-opt-arrow {
+      margin-left: auto;
+      color: #d4a017;
+      font-weight: 800;
+    }
+
+    /* ── MODO CLARO ─────────────────────────────────── */
+    html:not(.dark-mode) .am-page .header.scrolled {
+      background: rgba(255,255,255,0.88) !important;
+      border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+    }
+
+    html:not(.dark-mode) .am-intro {
+      background: var(--bg);
+    }
+
+    html:not(.dark-mode) .am-intro-grid {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+    }
+
+    html:not(.dark-mode) .am-intro-content h1 {
+      color: var(--text);
+    }
+
+    html:not(.dark-mode) .am-intro-content p {
+      color: var(--muted);
+    }
+
+    html:not(.dark-mode) .am-scroll-hint {
+      color: rgba(0,0,0,0.42);
+    }
+
+    html:not(.dark-mode) .am-scroll-arrow {
+      border-color: rgba(0,0,0,0.14);
+    }
+
+    html:not(.dark-mode) .am-feed-stage,
+    html:not(.dark-mode) .am-feed-side,
+    html:not(.dark-mode) .am-item {
+      background: var(--bg-soft);
+    }
+
+    html:not(.dark-mode) .am-feed-center {
+      box-shadow:
+        -20px 0 60px rgba(0,0,0,0.10),
+         20px 0 60px rgba(0,0,0,0.10);
+    }
+
+    html:not(.dark-mode) .am-media-placeholder::before {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, var(--item-hue), transparent 60%),
+        linear-gradient(170deg, #fffdf4 0%, #ffffff 50%, #f6f1df 100%);
+    }
+
+    html:not(.dark-mode) .am-feed-side-left::after,
+    html:not(.dark-mode) .am-feed-side-right::after {
+      background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(212,160,23,0.10), transparent 70%);
+    }
+
+    html:not(.dark-mode) .am-side-ghost {
+      filter: blur(24px) brightness(1.08) saturate(0.75);
+      opacity: 0.35;
+    }
+
+    html:not(.dark-mode) .am-modal-backdrop {
+      background: rgba(255,255,255,0.72);
+    }
+
+    html:not(.dark-mode) .am-modal {
+      background: #ffffff;
+      border-color: rgba(20,20,20,0.10);
+      box-shadow: 0 40px 90px rgba(0,0,0,0.18), 0 0 0 1px rgba(212,160,23,0.08);
+    }
+
+    html:not(.dark-mode) .am-modal-top {
+      background: linear-gradient(135deg, #fffdf4, #f6edcc);
+    }
+
+    html:not(.dark-mode) .am-modal-title,
+    html:not(.dark-mode) .am-modal-opt {
+      color: var(--text);
+    }
+
+    html:not(.dark-mode) .am-modal-sub,
+    html:not(.dark-mode) .am-modal-opt-sub {
+      color: var(--muted);
+    }
+
+    html:not(.dark-mode) .am-modal-opt {
+      border-color: rgba(0,0,0,0.08);
+      background: rgba(0,0,0,0.025);
+    }
+
+    html:not(.dark-mode) .am-modal-close,
+    html:not(.dark-mode) .am-modal-icon {
+      background: rgba(255,255,255,0.78);
+      border-color: rgba(0,0,0,0.10);
+      color: var(--text);
+    }
+
+    /* ── RESPONSIVO ─────────────────────────────────── */
+    @media (max-width: 640px) {
+      .am-intro-content h1 { font-size: 2.6rem; }
+      .am-intro-content p  { font-size: 0.96rem; }
+
+      .am-actions {
+        right: 12px;
+        bottom: 140px;
+        gap: 14px;
+      }
+
+      .am-action-icon {
+        width: 38px; height: 38px;
+        font-size: 1rem;
+      }
+
+      .am-footer {
+        right: 60px;
+        padding: 70px 14px 22px;
+      }
+
+      .am-item-title { font-size: 0.95rem; }
+      .am-item-desc  { font-size: 0.82rem; }
+
+      .am-lock-bubble { width: 52px; height: 52px; font-size: 1.3rem; }
+
+      .am-nav-arrows { display: none; }
+
+      .am-unlock-btn {
+        font-size: 0.82rem;
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body class="am-page">
+
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="header" id="am-header">
+    <div class="container nav">
+      <div class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="SobreMim.html">Sobre mim</a></li>
+          <li><a href="amostras.html" class="ativo" aria-current="page">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu-panel" id="mobileMenuPanel"
+      aria-label="Menu mobile" aria-hidden="true">
+      <a href="index.html">Início</a>
+      <a href="SobreMim.html">Sobre mim</a>
+      <a href="amostras.html" aria-current="page">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <!-- ══ INTRO ══════════════════════════════════════ -->
+    <section class="am-intro">
+      <div class="am-intro-bg" aria-hidden="true">
+        <div class="am-intro-orb am-intro-orb-1"></div>
+        <div class="am-intro-orb am-intro-orb-2"></div>
+        <div class="am-intro-orb am-intro-orb-3"></div>
+        <div class="am-intro-grid"></div>
+      </div>
+
+      <div class="am-intro-content">
+        <span class="hero-pill">✦ Amostras</span>
+        <h1>Uma prévia do<br>que te <em>espera</em>.</h1>
+        <p>Role para baixo e deixa o conteúdo aparecer. Uma amostra por vez, do seu jeito.</p>
+        <div class="am-intro-actions">
+          <a href="#feed" class="btn btn-primary" id="am-start-btn">Ver amostras ↓</a>
+          <a href="vip.html" class="btn btn-secondary">Acesso VIP</a>
+        </div>
+      </div>
+
+      <div class="am-scroll-hint" aria-hidden="true">
+        <span>Role para ver</span>
+        <div class="am-scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- ══ FEED FYP ════════════════════════════════════ -->
+    <div class="am-feed-stage" id="am-feed-stage">
+
+      <!-- Painel lateral esquerdo (só desktop) -->
+      <div class="am-feed-side am-feed-side-left" aria-hidden="true">
+        <div class="am-side-ghost" id="am-ghost-left"></div>
+      </div>
+
+      <!-- COLUNA CENTRAL — story 9:16 -->
+      <div class="am-feed-center" id="am-feed" role="feed" aria-label="Feed de amostras">
+
+      <!-- ── ITEM 1 ─── vídeo ───────────────────────── -->
+      <article class="am-item" data-type="video" data-duration="8"
+        aria-label="Amostra: Noite Especial — Vídeo" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder">
+            <!-- Substitua por: <video src="video1.mp4" loop muted playsinline></video> -->
+          </div>
+          <div class="am-media-icon" aria-hidden="true">🌙</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true">
+          <!-- gerado pelo JS -->
+        </div>
+
+        <span class="am-type-pill video">🎬 Vídeo</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">4,2K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">🔥 Popular</span>
+          <p class="am-item-title">Noite Especial</p>
+          <p class="am-item-desc">1 vídeo exclusivo · 1 minuto completo</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 18,6K</span>
+            <span class="am-item-stat">♡ 4,2K</span>
+            <span class="am-item-stat">⏱ 1 semana</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 2 ─── foto ────────────────────────── -->
+      <article class="am-item" data-type="foto" data-duration="6"
+        aria-label="Amostra: Sessão Kawaii — Foto" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder">
+            <!-- Substitua por: <img src="foto-kawaii.jpg" alt="Sessão kawaii" loading="lazy" /> -->
+          </div>
+          <div class="am-media-icon" aria-hidden="true">🌸</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill">📸 Foto</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">2,7K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">✦ Exclusivo</span>
+          <p class="am-item-title">Sessão Kawaii</p>
+          <p class="am-item-desc">Pack de fotos temático · 12 imagens</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 9,4K</span>
+            <span class="am-item-stat">♡ 2,7K</span>
+            <span class="am-item-stat">⏱ 1 mês</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 3 ─── vídeo ───────────────────────── -->
+      <article class="am-item" data-type="video" data-duration="10"
+        aria-label="Amostra: Pack Novinho — Vídeo" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">🔥</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill video">🎬 Vídeo</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">7,2K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">🔥 Mais pedido</span>
+          <p class="am-item-title">Pack Novinho · 7 vídeos</p>
+          <p class="am-item-desc">5 minutos de conteúdo · várias posições</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 31,4K</span>
+            <span class="am-item-stat">♡ 7,2K</span>
+            <span class="am-item-stat">⏱ 1 mês</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 4 ─── foto ────────────────────────── -->
+      <article class="am-item" data-type="foto" data-duration="6"
+        aria-label="Amostra: Outfit do Dia — Foto" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">✨</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill">📸 Foto</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">1,5K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">♡ Novo</span>
+          <p class="am-item-title">Outfit do Dia ✨</p>
+          <p class="am-item-desc">Foto exclusiva do dia a dia</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 7,9K</span>
+            <span class="am-item-stat">♡ 1,5K</span>
+            <span class="am-item-stat">⏱ 5 dias</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 5 ─── vídeo personalizado ────────── -->
+      <article class="am-item" data-type="video" data-duration="9"
+        aria-label="Amostra: Com Seu Nome — Personalizado" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">🎙️</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill video">🎙️ Personalizado</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">5,8K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">⭐ Favorito</span>
+          <p class="am-item-title">Com o seu nome 💛</p>
+          <p class="am-item-desc">Vídeo gravado exclusivamente pra você</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 21K</span>
+            <span class="am-item-stat">♡ 5,8K</span>
+            <span class="am-item-stat">⏱ 3 semanas</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 6 ─── foto ────────────────────────── -->
+      <article class="am-item" data-type="foto" data-duration="6"
+        aria-label="Amostra: Sessão Temática — Foto" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">🍓</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill">📸 Foto</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">2,0K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">♡ Especial</span>
+          <p class="am-item-title">Sessão Temática 🍓</p>
+          <p class="am-item-desc">Pack temático · 8 fotos exclusivas</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 8,7K</span>
+            <span class="am-item-stat">♡ 2,0K</span>
+            <span class="am-item-stat">⏱ 1 mês</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 7 ─── vídeo ───────────────────────── -->
+      <article class="am-item" data-type="video" data-duration="12"
+        aria-label="Amostra: Pack Platina — Vídeo" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">👑</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill video">🎬 Vídeo</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">9,1K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">👑 Platina</span>
+          <p class="am-item-title">Pack Platina · 18 vídeos</p>
+          <p class="am-item-desc">16 minutos · conteúdo premium completo</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 43,8K</span>
+            <span class="am-item-stat">♡ 9,1K</span>
+            <span class="am-item-stat">⏱ 3 meses</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      <!-- ── ITEM 8 ─── foto ────────────────────────── -->
+      <article class="am-item" data-type="foto" data-duration="6"
+        aria-label="Amostra: Gamer Girl — Foto" tabindex="0">
+
+        <div class="am-media">
+          <div class="am-media-placeholder"></div>
+          <div class="am-media-icon" aria-hidden="true">🎮</div>
+        </div>
+
+        <div class="am-scan" aria-hidden="true"></div>
+        <div class="am-lock-overlay" aria-hidden="true"></div>
+        <div class="am-lock-center" aria-hidden="true">
+          <div class="am-lock-bubble">🔒</div>
+          <span class="am-lock-text">Desbloqueie para ver</span>
+        </div>
+
+        <div class="am-stories-bar" aria-hidden="true"></div>
+        <span class="am-type-pill">📸 Foto</span>
+
+        <div class="am-actions">
+          <button class="am-action-btn am-heart-btn" aria-label="Curtir" data-liked="false">
+            <div class="am-action-icon">♡</div>
+            <span class="am-action-count">1,4K</span>
+          </button>
+          <button class="am-action-btn" aria-label="Desbloquear" onclick="openModal(this.closest('.am-item'))">
+            <div class="am-action-icon">🔓</div>
+            <span class="am-action-count">Ver</span>
+          </button>
+        </div>
+
+        <div class="am-footer">
+          <span class="am-item-tag">🎮 Temático</span>
+          <p class="am-item-title">Gamer Girl 💜</p>
+          <p class="am-item-desc">Sessão temática para gamers</p>
+          <div class="am-item-stats">
+            <span class="am-item-stat">👁 6,1K</span>
+            <span class="am-item-stat">♡ 1,4K</span>
+            <span class="am-item-stat">⏱ 2 meses</span>
+          </div>
+          <button class="am-unlock-btn" onclick="openModal(this.closest('.am-item'))">
+            Desbloquear prévia completa ✦
+          </button>
+        </div>
+      </article>
+
+      </div><!-- /am-feed-center -->
+
+      <!-- Painel lateral direito (só desktop) -->
+      <div class="am-feed-side am-feed-side-right" aria-hidden="true">
+        <div class="am-side-ghost" id="am-ghost-right"></div>
+        <!-- Setas de nav ficam aqui no desktop -->
+        <div class="am-nav-arrows" id="am-nav-arrows">
+          <button class="am-nav-arrow" id="am-prev" aria-label="Item anterior" disabled>↑</button>
+          <button class="am-nav-arrow" id="am-next" aria-label="Próximo item">↓</button>
+        </div>
+        <!-- Contador -->
+        <div class="am-counter" id="am-counter" aria-live="polite" aria-atomic="true">
+          <span class="am-counter-dot"></span>
+          <span id="am-counter-text">1 / 8</span>
+        </div>
+      </div>
+
+    </div><!-- /am-feed-stage -->
+
+  </main>
+
+  <!-- MODAL DE DESBLOQUEIO -->
+  <div class="am-modal-backdrop" id="am-modal"
+    role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="am-modal">
+      <div class="am-modal-top">
+        <div class="am-modal-top-orb" aria-hidden="true"></div>
+        <div class="am-modal-icon">🔒</div>
+        <button class="am-modal-close" id="modal-close" aria-label="Fechar">✕</button>
+      </div>
+      <div class="am-modal-body">
+        <h3 class="am-modal-title" id="modal-title">Conteúdo bloqueado</h3>
+        <p class="am-modal-sub" id="modal-sub">Escolha como desbloquear essa amostra.</p>
+        <div class="am-modal-opts">
+          <a href="packs.html" class="am-modal-opt">
+            <div class="am-modal-opt-icon">📦</div>
+            <div>
+              <div class="am-modal-opt-label">Ver packs disponíveis</div>
+              <div class="am-modal-opt-sub">A partir de R$ 25</div>
+            </div>
+            <span class="am-modal-opt-arrow">→</span>
+          </a>
+          <a href="vip.html" class="am-modal-opt">
+            <div class="am-modal-opt-icon">👑</div>
+            <div>
+              <div class="am-modal-opt-label">Acesso VIP completo</div>
+              <div class="am-modal-opt-sub">Todo o conteúdo desbloqueado</div>
+            </div>
+            <span class="am-modal-opt-arrow">→</span>
+          </a>
+          <a href="https://wa.me/seunumero" class="am-modal-opt" target="_blank" rel="noopener">
+            <div class="am-modal-opt-icon">💬</div>
+            <div>
+              <div class="am-modal-opt-label">Falar no WhatsApp</div>
+              <div class="am-modal-opt-sub">Tire dúvidas direto comigo</div>
+            </div>
+            <span class="am-modal-opt-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       AMOSTRAS — FYP FEED ENGINE
+    ═══════════════════════════════════════════════════════ */
+
+    const feed    = document.getElementById("am-feed");
+    const items   = Array.from(feed.querySelectorAll(".am-item"));
+    const total   = items.length;
+    const counter = document.getElementById("am-counter-text");
+    const btnPrev = document.getElementById("am-prev");
+    const btnNext = document.getElementById("am-next");
+    const header  = document.getElementById("am-header");
+    const modal   = document.getElementById("am-modal");
+
+    let currentIdx = 0;
+    let progressTimers = [];
+
+    /* ── BARRA DE STORIES ───────────────────────────────── */
+    function buildStoriesBars() {
+      items.forEach((item, i) => {
+        const bar = item.querySelector(".am-stories-bar");
+        if (!bar) return;
+        bar.innerHTML = items.map((_, j) => `
+          <div class="am-stories-dot${j < i ? " done" : j === i ? " current" : ""}" style="--item-duration:${item.dataset.duration || 8}s">
+            <div class="am-stories-dot-fill"></div>
+          </div>
+        `).join("");
+      });
+    }
+
+    /* ── ATIVAR ITEM ────────────────────────────────────── */
+    function activateItem(idx) {
+      // Limpa timers
+      progressTimers.forEach(clearTimeout);
+      progressTimers = [];
+
+      // Remove active de todos
+      items.forEach(it => it.classList.remove("active"));
+
+      if (idx < 0 || idx >= total) return;
+
+      const item = items[idx];
+      item.classList.add("active");
+      currentIdx = idx;
+
+      // Atualiza contador
+      counter.textContent = `${idx + 1} / ${total}`;
+
+      // Atualiza botões de nav
+      btnPrev.disabled = idx === 0;
+      btnNext.disabled = idx === total - 1;
+
+      // Atualiza barra de stories
+      buildStoriesBars();
+
+      // Autoplay de vídeo se existir
+      const video = item.querySelector("video");
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+
+      // Para vídeos em outros items
+      items.forEach((it, i) => {
+        if (i !== idx) {
+          const v = it.querySelector("video");
+          if (v) { v.pause(); v.currentTime = 0; }
+        }
+      });
+
+      // Auto-avança depois da duração (simula story)
+      const duration = (parseFloat(item.dataset.duration) || 8) * 1000;
+      const timer = setTimeout(() => {
+        if (currentIdx < total - 1) scrollToItem(currentIdx + 1);
+      }, duration + 2000); // +2s de margem para o usuário ler
+      progressTimers.push(timer);
+    }
+
+    /* ── SCROLL PARA ITEM ───────────────────────────────── */
+    function scrollToItem(idx) {
+      if (idx < 0 || idx >= total) return;
+      items[idx].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    /* ── INTERSECTION OBSERVER ──────────────────────────── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          const idx = items.indexOf(entry.target);
+          if (idx !== currentIdx) activateItem(idx);
+        }
+      });
+    }, {
+      root: feed,
+      threshold: 0.6,
+    });
+
+    items.forEach(item => observer.observe(item));
+
+    /* ── HEADER transparente sobre o feed ──────────────── */
+    // O header fica transparente quando o feed está visível
+    const feedObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          header.classList.remove("scrolled");
+        } else {
+          header.classList.add("scrolled");
+        }
+      });
+    }, { threshold: 0.1 });
+    feedObserver.observe(feed);
+
+    /* ── SCROLL INTRO → FEED ────────────────────────────── */
+    document.getElementById("am-start-btn").addEventListener("click", (e) => {
+      e.preventDefault();
+      feed.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => activateItem(0), 600);
+    });
+
+    /* ── BOTÕES DE NAV ──────────────────────────────────── */
+    btnPrev.addEventListener("click", () => scrollToItem(currentIdx - 1));
+    btnNext.addEventListener("click", () => scrollToItem(currentIdx + 1));
+
+    /* ── TECLADO ────────────────────────────────────────── */
+    document.addEventListener("keydown", (e) => {
+      if (modal.classList.contains("open")) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault(); scrollToItem(currentIdx + 1);
+      }
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault(); scrollToItem(currentIdx - 1);
+      }
+    });
+
+    /* ── SWIPE TOUCH ────────────────────────────────────── */
+    let touchStartY = 0;
+    feed.addEventListener("touchstart", e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    feed.addEventListener("touchend", e => {
+      const delta = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(delta) > 40) {
+        if (delta > 0) scrollToItem(currentIdx + 1);
+        else scrollToItem(currentIdx - 1);
+      }
+    }, { passive: true });
+
+    /* ── BOTÕES CURTIR ──────────────────────────────────── */
+    document.querySelectorAll(".am-heart-btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        const liked = btn.dataset.liked === "true";
+        btn.dataset.liked = String(!liked);
+        const icon = btn.querySelector(".am-action-icon");
+        btn.classList.toggle("liked", !liked);
+        icon.textContent = liked ? "♡" : "♥";
+
+        // Micro-animação
+        icon.style.transform = "scale(1.35)";
+        setTimeout(() => { icon.style.transform = ""; }, 220);
+      });
+    });
+
+    /* ── MODAL ──────────────────────────────────────────── */
+    window.openModal = function(item) {
+      const title = item?.querySelector(".am-item-title")?.textContent || "Conteúdo";
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-sub").textContent = "Escolha como desbloquear essa amostra.";
+      modal.classList.add("open");
+      document.getElementById("modal-close").focus();
+    };
+
+    document.getElementById("modal-close").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") modal.classList.remove("open"); });
+
+    /* ── INIT ───────────────────────────────────────────── */
+    buildStoriesBars();
+
+    // Ativa o primeiro item quando o feed entra na viewport
+    const initObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        activateItem(0);
+        initObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+    initObserver.observe(feed);
+  </script>
+</body>
+</html>

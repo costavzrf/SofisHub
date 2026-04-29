@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Packs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.classList.add("dark-mode");
+    })();
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    html.dark-mode { background: #08090c; }
+    body { opacity: 0; visibility: hidden; }
+    html.page-ready body {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.15s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       PACKS PAGE — estilos específicos
+    ══════════════════════════════════════════ */
+
+    /* ── HERO ───────────────────────────────── */
+    .packs-hero {
+      position: relative;
+      padding: 72px 0 64px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .packs-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ph-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .ph-orb-1 {
+      width: 500px; height: 500px;
+      top: -160px; right: -80px;
+      background: radial-gradient(circle, rgba(236,205,45,0.13), transparent 65%);
+    }
+
+    .ph-orb-2 {
+      width: 360px; height: 360px;
+      bottom: -100px; left: -60px;
+      background: radial-gradient(circle, rgba(236,205,45,0.08), transparent 65%);
+    }
+
+    .ph-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      opacity: 0.45;
+    }
+
+    .packs-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .packs-hero-inner h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      letter-spacing: -0.065em;
+      line-height: 0.96;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .packs-hero-inner h1 em {
+      font-style: normal;
+      color: var(--yellow-dark);
+    }
+
+    .packs-hero-inner p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.68;
+    }
+
+    /* Trust badges */
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .trust-badge .tb-icon {
+      color: var(--yellow-dark);
+      font-size: 1rem;
+    }
+
+    html:not(.dark-mode) .trust-badge {
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    /* ── SEÇÃO BADGE / HEADER ────────────────── */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--yellow-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow-dark);
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(236,205,45,0.55);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    /* ── FEATURED PACK (destaque) ───────────── */
+    .packs-featured {
+      padding: 70px 0;
+    }
+
+    .featured-pack-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(236,205,45,0.38);
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.14),
+        0 0 0 1px rgba(236,205,45,0.12);
+    }
+
+    html:not(.dark-mode) .featured-pack-card {
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.12),
+        0 0 0 1px rgba(214,184,58,0.22);
+    }
+
+    /* Lado esquerdo: visual */
+    .fpc-visual {
+      position: relative;
+      min-height: 480px;
+      background:
+        linear-gradient(135deg, #1a1408 0%, #0f1115 60%),
+        radial-gradient(circle at 40% 30%, rgba(236,205,45,0.22), transparent 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 40px;
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .fpc-visual {
+      background:
+        linear-gradient(135deg, #fffbe8 0%, #f5f0d4 100%);
+    }
+
+    .fpc-visual-orb {
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,205,45,0.22), transparent 65%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .fpc-visual-icon {
+      position: relative;
+      z-index: 1;
+      font-size: 100px;
+      line-height: 1;
+      filter: drop-shadow(0 0 40px rgba(236,205,45,0.45));
+      animation: float-icon 4s ease-in-out infinite;
+    }
+
+    @keyframes float-icon {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.04); }
+    }
+
+    .fpc-badge-popular {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #181300;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Lado direito: conteúdo */
+    .fpc-content {
+      padding: 50px 50px 50px 46px;
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    html:not(.dark-mode) .fpc-content {
+      background: #fff;
+    }
+
+    .fpc-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--yellow-soft);
+      border: 1px solid rgba(236,205,45,0.28);
+      color: var(--yellow-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      width: fit-content;
+    }
+
+    .fpc-content h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.05em;
+      line-height: 1.04;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .fpc-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .fpc-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .fpc-items li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .fpc-items li .fpc-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      color: #181300;
+    }
+
+    .fpc-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .fpc-price-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .fpc-price-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fpc-price {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--yellow-dark);
+      line-height: 1;
+    }
+
+    .fpc-price span {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    /* ── GRID DE PACKS ───────────────────────── */
+    .packs-grid-section {
+      padding: 20px 0 80px;
+    }
+
+    .packs-section-header {
+      margin-bottom: 40px;
+    }
+
+    .packs-section-header h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .packs-section-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .packs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .pack-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+    }
+
+    html:not(.dark-mode) .pack-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
+      border: 1px solid rgba(20,20,20,0.13);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,0.10),
+        0 4px 14px rgba(0,0,0,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .pack-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(236,205,45,0.44);
+      box-shadow:
+        0 34px 75px rgba(0,0,0,0.16),
+        0 0 0 1px rgba(236,205,45,0.16);
+    }
+
+    .pack-card.is-popular {
+      border-color: rgba(236,205,45,0.44);
+    }
+
+    .pack-card-header {
+      padding: 28px 28px 22px;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at top right, rgba(236,205,45,0.09), transparent 55%);
+    }
+
+    .pack-card.is-popular .pack-card-header {
+      background:
+        radial-gradient(circle at top right, rgba(236,205,45,0.16), transparent 55%);
+    }
+
+    .pack-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .pack-icon {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: var(--yellow-soft);
+      border: 1px solid var(--border);
+    }
+
+    .pack-popular-pill {
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #181300;
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .pack-card-header h3 {
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .pack-card-header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .pack-card-body {
+      padding: 22px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .pack-items-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--yellow-dark);
+      margin-bottom: 14px;
+    }
+
+    .pack-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 26px;
+      flex: 1;
+    }
+
+    .pack-items li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .pack-items li::before {
+      content: "✦";
+      color: var(--yellow-dark);
+      font-size: 0.65rem;
+      flex-shrink: 0;
+    }
+
+    .pack-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .pack-price {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--yellow-dark);
+      line-height: 1;
+    }
+
+    .pack-price small {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .pack-qty {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── PACK ESPECIAL (largura total) ──────── */
+    .pack-wide-section {
+      padding: 0 0 80px;
+    }
+
+    .pack-wide-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      padding: 40px 48px;
+      border-radius: 28px;
+      border: 1px solid rgba(236,205,45,0.38);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.26s ease;
+    }
+
+    html:not(.dark-mode) .pack-wide-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
+      border: 1px solid rgba(214,184,58,0.28);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,0.10),
+        0 0 0 1px rgba(214,184,58,0.12);
+    }
+
+    .pack-wide-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pack-wide-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(236,205,45,0.10), transparent 50%);
+      pointer-events: none;
+    }
+
+    .pack-wide-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pack-wide-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pack-wide-tag {
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pack-wide-tag.tag-gold {
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #181300;
+    }
+
+    .pack-wide-tag.tag-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--yellow-soft);
+    }
+
+    .pack-wide-left h3 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      letter-spacing: -0.045em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .pack-wide-left p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.62;
+      max-width: 580px;
+      margin-bottom: 22px;
+    }
+
+    .pack-wide-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pwd-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    html:not(.dark-mode) .pwd-item {
+      background: #fff;
+    }
+
+    .pwd-item .pwd-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--yellow-dark);
+      flex-shrink: 0;
+    }
+
+    .pack-wide-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .pack-wide-price-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .pack-wide-price-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .pack-wide-price {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--yellow-dark);
+      line-height: 1;
+    }
+
+    .pack-wide-price small {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    /* ── CTA SECTION ─────────────────────────── */
+    .packs-cta {
+      padding: 0 0 90px;
+    }
+
+    .cta-box {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 64px 40px;
+      border-radius: 36px;
+      border: 1px solid rgba(236,205,45,0.3);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .cta-box {
+      background: #fff;
+      border-color: rgba(20,20,20,0.12);
+    }
+
+    .cta-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .co {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+    }
+
+    .co-1 {
+      width: 300px; height: 300px;
+      top: -80px; left: -60px;
+      background: radial-gradient(circle, rgba(236,205,45,0.16), transparent);
+    }
+
+    .co-2 {
+      width: 250px; height: 250px;
+      bottom: -70px; right: -50px;
+      background: radial-gradient(circle, rgba(236,205,45,0.12), transparent);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.055em;
+      line-height: 1.08;
+      margin: 14px 0 12px;
+      color: var(--text);
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      font-size: 1.04rem;
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+
+    /* ── RESPONSIVO ──────────────────────────── */
+    @media (max-width: 1040px) {
+      .featured-pack-card {
+        grid-template-columns: 1fr;
+      }
+
+      .fpc-visual {
+        min-height: 280px;
+        padding: 40px;
+      }
+
+      .fpc-visual-icon {
+        font-size: 72px;
+      }
+
+      .fpc-content {
+        padding: 36px 36px 40px;
+      }
+
+      .fpc-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .fpc-bottom .btn {
+        width: 100%;
+      }
+
+      .packs-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pack-wide-card {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 32px 28px;
+      }
+
+      .pack-wide-right {
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: unset;
+        width: 100%;
+        text-align: left;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .packs-hero {
+        padding: 44px 0 50px;
+      }
+
+      .packs-hero-inner h1 {
+        font-size: 2.5rem;
+      }
+
+      .trust-badges {
+        gap: 8px;
+      }
+
+      .trust-badge {
+        font-size: 0.8rem;
+        padding: 8px 13px;
+      }
+
+      .packs-featured {
+        padding: 50px 0;
+      }
+
+      .fpc-content {
+        padding: 26px 22px 30px;
+      }
+
+      .fpc-content h2 {
+        font-size: 1.6rem;
+      }
+
+      .packs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pack-card-header,
+      .pack-card-body {
+        padding: 20px;
+      }
+
+      .pack-wide-card {
+        padding: 24px 20px;
+      }
+
+      .pack-wide-right {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
+      .pack-wide-right .btn {
+        width: 100%;
+      }
+
+      .cta-box {
+        padding: 40px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+      <div class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="SobreMim.html">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html" class="ativo" aria-current="page">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobileMenuPanel"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav
+      class="mobile-menu-panel"
+      id="mobileMenuPanel"
+      aria-label="Menu mobile"
+      aria-hidden="true"
+    >
+      <a href="index.html">Início</a>
+      <a href="SobreMim.html">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html" aria-current="page">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main id="conteudo-principal">
+
+    <!-- ══ HERO ══════════════════════════════════════════════ -->
+    <section class="packs-hero" aria-labelledby="packs-hero-titulo">
+      <div class="packs-hero-bg" aria-hidden="true">
+        <div class="ph-orb ph-orb-1"></div>
+        <div class="ph-orb ph-orb-2"></div>
+        <div class="ph-grid"></div>
+      </div>
+
+      <div class="container packs-hero-inner">
+        <span class="hero-pill">♡ Meus Packs</span>
+        <h1 id="packs-hero-titulo">Conteúdo <em>exclusivo</em>,<br>sem enrolação.</h1>
+        <p>Packs organizados e prontos para acesso imediato. Escolha o que combina com você e garanta agora.</p>
+
+        <div class="trust-badges" role="list">
+          <span class="trust-badge" role="listitem">
+            <span class="tb-icon">⚡</span> Entrega imediata
+          </span>
+          <span class="trust-badge" role="listitem">
+            <span class="tb-icon">🔒</span> 100% discreto
+          </span>
+          <span class="trust-badge" role="listitem">
+            <span class="tb-icon">✦</span> Conteúdo exclusivo
+          </span>
+          <span class="trust-badge" role="listitem">
+            <span class="tb-icon">♡</span> Atendimento direto
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ DESTAQUE: PACK COM SEU NOME ══════════════════════ -->
+    <section class="packs-featured" aria-labelledby="featured-pack-titulo">
+      <div class="container">
+
+        <div style="margin-bottom: 32px;">
+          <div class="section-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Mais pedido
+          </div>
+          <h2 id="featured-pack-titulo" style="font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-0.05em;color:var(--text);">
+            O favorito das clientes
+          </h2>
+        </div>
+
+        <article class="featured-pack-card" aria-label="Pack Com Seu Nome — destaque">
+          <!-- Visual -->
+          <div class="fpc-visual">
+            <div class="fpc-visual-orb" aria-hidden="true"></div>
+            <div class="fpc-visual-icon" aria-hidden="true">🎙️</div>
+            <span class="fpc-badge-popular" aria-label="Mais popular">⭐ Mais Popular</span>
+          </div>
+
+          <!-- Conteúdo -->
+          <div class="fpc-content">
+            <span class="fpc-tag">✦ Especial &amp; Personalizado</span>
+
+            <h2>Com Seu Nome</h2>
+            <p class="fpc-desc">
+              Um vídeo gravado exclusivamente para você — seu nome, do jeito que você gosta, com tudo que faz esse momento único.
+            </p>
+
+            <ul class="fpc-items" aria-label="O que inclui">
+              <li>
+                <span class="fpc-check" aria-hidden="true">✓</span>
+                Duração de 1 a 2 minutos
+              </li>
+              <li>
+                <span class="fpc-check" aria-hidden="true">✓</span>
+                Seu nome dito várias vezes
+              </li>
+              <li>
+                <span class="fpc-check" aria-hidden="true">✓</span>
+                Totalmente personalizado
+              </li>
+              <li>
+                <span class="fpc-check" aria-hidden="true">✓</span>
+                Entrega rápida e discreta
+              </li>
+            </ul>
+
+            <div class="fpc-bottom">
+              <div class="fpc-price-wrap">
+                <span class="fpc-price-label">Valor</span>
+                <span class="fpc-price"><span>R$</span> 30</span>
+              </div>
+              <a href="checkout.html?produto=com-seu-nome" class="btn btn-primary">
+                Comprar agora ♡
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══ GRID DE PACKS ══════════════════════════════════════ -->
+    <section class="packs-grid-section" aria-labelledby="grid-packs-titulo">
+      <div class="container">
+
+        <div class="packs-section-header">
+          <div class="section-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Coleção completa
+          </div>
+          <h2 id="grid-packs-titulo">Escolha o seu pack</h2>
+          <p>Do básico ao platina, tem uma opção para cada desejo.</p>
+        </div>
+
+        <div class="packs-grid">
+
+          <!-- Pack Básico -->
+          <article class="pack-card" aria-labelledby="pack-basico-titulo">
+            <div class="pack-card-header">
+              <div class="pack-card-top">
+                <div class="pack-icon" aria-hidden="true">📸</div>
+              </div>
+              <h3 id="pack-basico-titulo">Pack Básico</h3>
+              <p>Corpo todo, sem enrolação. Pra quem quer começar bem.</p>
+            </div>
+            <div class="pack-card-body">
+              <p class="pack-items-label">O que inclui</p>
+              <ul class="pack-items" aria-label="Itens do Pack Básico">
+                <li>Fotos de corpo inteiro</li>
+                <li>Conteúdo sem censura</li>
+                <li>Entrega imediata</li>
+              </ul>
+              <div class="pack-price-row">
+                <div class="pack-price"><small>R$</small> 25</div>
+                <span class="pack-qty">Pack único</span>
+              </div>
+              <a href="checkout.html?produto=pack-basico" class="btn btn-primary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+
+          <!-- Pack Novinho — popular -->
+          <article class="pack-card is-popular" aria-labelledby="pack-novinho-titulo">
+            <div class="pack-card-header">
+              <div class="pack-card-top">
+                <div class="pack-icon" aria-hidden="true">🔥</div>
+                <span class="pack-popular-pill">Popular</span>
+              </div>
+              <h3 id="pack-novinho-titulo">Pack Novinho</h3>
+              <p>7 vídeos em várias posições + 1 foto. 5 minutos de puro conteúdo.</p>
+            </div>
+            <div class="pack-card-body">
+              <p class="pack-items-label">O que inclui</p>
+              <ul class="pack-items" aria-label="Itens do Pack Novinho">
+                <li>7 vídeos em posições variadas</li>
+                <li>1 foto exclusiva</li>
+                <li>5 minutos no total</li>
+                <li>Entrega imediata</li>
+              </ul>
+              <div class="pack-price-row">
+                <div class="pack-price"><small>R$</small> 50</div>
+                <span class="pack-qty">7 vídeos + 1 foto</span>
+              </div>
+              <a href="checkout.html?produto=pack-novinho" class="btn btn-primary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+
+          <!-- Pack Platina -->
+          <article class="pack-card" aria-labelledby="pack-platina-titulo">
+            <div class="pack-card-header">
+              <div class="pack-card-top">
+                <div class="pack-icon" aria-hidden="true">👑</div>
+              </div>
+              <h3 id="pack-platina-titulo">Pack Platina</h3>
+              <p>18 vídeos + 10 fotos. 16 minutos de conteúdo premium, sem economizar.</p>
+            </div>
+            <div class="pack-card-body">
+              <p class="pack-items-label">O que inclui</p>
+              <ul class="pack-items" aria-label="Itens do Pack Platina">
+                <li>18 vídeos exclusivos</li>
+                <li>10 fotos de alta qualidade</li>
+                <li>16 minutos de conteúdo</li>
+                <li>Entrega imediata</li>
+              </ul>
+              <div class="pack-price-row">
+                <div class="pack-price"><small>R$</small> 120</div>
+                <span class="pack-qty">18 vídeos + 10 fotos</span>
+              </div>
+              <a href="checkout.html?produto=pack-platina" class="btn btn-primary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PACK ESPECIAL LARGURA TOTAL ═══════════════════════ -->
+    <section class="pack-wide-section" aria-labelledby="pack-especial-titulo">
+      <div class="container">
+
+        <div class="packs-section-header" style="margin-bottom:28px;">
+          <div class="section-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Serviço especial
+          </div>
+          <h2 id="pack-especial-titulo">Quer algo ainda mais personalizado?</h2>
+        </div>
+
+        <article class="pack-wide-card" aria-label="Pack personalizado sob encomenda">
+          <div class="pack-wide-bg" aria-hidden="true"></div>
+
+          <div class="pack-wide-left">
+            <div class="pack-wide-tags">
+              <span class="pack-wide-tag tag-gold">✦ Sob encomenda</span>
+              <span class="pack-wide-tag tag-outline">Personalizado</span>
+              <span class="pack-wide-tag tag-outline">100% exclusivo</span>
+            </div>
+            <h3>Pack Personalizado</h3>
+            <p>
+              Quer algo feito especialmente pra você? Me conta o que tem em mente — cenário, duração, tema — e a gente monta junto o seu pack dos sonhos.
+            </p>
+            <div class="pack-wide-details" role="list">
+              <span class="pwd-item" role="listitem">
+                <span class="pwd-dot" aria-hidden="true"></span>
+                Roteiro do seu jeito
+              </span>
+              <span class="pwd-item" role="listitem">
+                <span class="pwd-dot" aria-hidden="true"></span>
+                Duração a combinar
+              </span>
+              <span class="pwd-item" role="listitem">
+                <span class="pwd-dot" aria-hidden="true"></span>
+                Preço sob consulta
+              </span>
+            </div>
+          </div>
+
+          <div class="pack-wide-right">
+            <div class="pack-wide-price-wrap">
+              <span class="pack-wide-price-label">A partir de</span>
+              <span class="pack-wide-price"><small>R$</small> 60</span>
+            </div>
+            <a href="checkout.html?produto=pack-personalizado" class="btn btn-primary">
+              Falar agora ♡
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══ CTA FINAL ════════════════════════════════════════ -->
+    <section class="packs-cta" aria-labelledby="cta-packs-titulo">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-orbs" aria-hidden="true">
+            <div class="co co-1"></div>
+            <div class="co co-2"></div>
+          </div>
+          <span class="hero-pill">✦ Acesso exclusivo</span>
+          <h2 id="cta-packs-titulo">Quer ainda mais?</h2>
+          <p>No VIP você tem acesso contínuo a conteúdo novo, mais próximo e sem limites.</p>
+          <div class="hero-actions" style="justify-content:center">
+            <a href="vip.html" class="btn btn-primary">Conhecer o VIP</a>
+            <a href="servicos.html" class="btn btn-secondary">Ver serviços</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-logo">Sofis<span>Hub</span></p>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

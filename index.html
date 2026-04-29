@@ -6,9 +6,28 @@
 
   <title>Sofis Hub | Início</title>
 
+  <!-- CORREÇÃO: preconnect antes do font load para não bloquear renderização -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <!-- SISTEMA DE TEMA: precisa rodar antes do CSS para evitar flash -->
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
   <style>
     html {
       background: #ffffff;
+    }
+
+    html.dark-mode {
+      background: #08090c;
     }
 
     body {
@@ -24,35 +43,26 @@
   </style>
 
   <link rel="stylesheet" href="style.css" />
-
-  <!-- SISTEMA DE TEMA CORRIGIDO -->
-  <script>
-    (() => {
-      const savedTheme = localStorage.getItem("theme");
-
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark-mode");
-      }
-
-      if (savedTheme === "light") {
-        document.documentElement.classList.remove("dark-mode");
-      }
-    })();
-  </script>
 </head>
 
 <body>
 
+  <!-- CORREÇÃO: skip link para acessibilidade por teclado -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
   <header class="header">
     <div class="container nav">
-      <h1 class="logo">
+      <!-- CORREÇÃO: logo em <div> — <h1> reservado para o título principal do conteúdo -->
+      <div class="logo">
         <a href="index.html">Sofis<span>Hub</span></a>
-      </h1>
+      </div>
 
-      <nav class="nav-desktop">
+      <!-- CORREÇÃO: role="navigation" implícito em <nav>; aria-label diferencia navs -->
+      <nav class="nav-desktop" aria-label="Navegação principal">
         <ul class="menu">
-          <li><a href="index.html" class="ativo">Início</a></li>
-          <li><a href="#sobre">Sobre mim</a></li>
+          <!-- CORREÇÃO: aria-current="page" no link ativo -->
+          <li><a href="index.html" class="ativo" aria-current="page">Início</a></li>
+          <li><a href="SobreMim.html">Sobre mim</a></li>
           <li><a href="amostras.html">Amostras</a></li>
           <li><a href="packs.html">Packs</a></li>
           <li><a href="vip.html">VIP</a></li>
@@ -65,7 +75,7 @@
       <div class="nav-actions">
         <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
 
-        <!-- BOTÃO TEMA -->
+        <!-- Botão de tema: aria-label já existia, mantido -->
         <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
           <span class="switch-bg"></span>
           <span class="switch-moon-shade"></span>
@@ -76,7 +86,14 @@
           <span class="switch-thumb"></span>
         </button>
 
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <!-- CORREÇÃO: aria-label e aria-expanded adicionados -->
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobileMenuPanel"
+        >
           <span></span>
           <span></span>
           <span></span>
@@ -84,8 +101,14 @@
       </div>
     </div>
 
-    <div class="mobile-menu-panel" id="mobileMenuPanel">
-      <a href="index.html">Início</a>
+    <!-- CORREÇÃO: aria-hidden sincronizado via JS; role="navigation" para acessibilidade -->
+    <nav
+      class="mobile-menu-panel"
+      id="mobileMenuPanel"
+      aria-label="Menu mobile"
+      aria-hidden="true"
+    >
+      <a href="index.html" aria-current="page">Início</a>
       <a href="#sobre">Sobre mim</a>
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
@@ -94,19 +117,21 @@
       <a href="webnamoro.html">Webnamoro</a>
       <a href="mimos.html">Mimos</a>
       <a href="vip.html" class="mobile-cta">Acesso VIP</a>
-    </div>
+    </nav>
   </header>
 
-  <main>
+  <!-- CORREÇÃO: id para o skip link funcionar; role="main" implícito em <main> -->
+  <main id="conteudo-principal">
 
     <!-- HERO -->
-    <section class="hero-index">
+    <section class="hero-index" aria-labelledby="hero-titulo">
       <div class="container hero-grid">
 
         <div class="hero-content">
           <span class="hero-pill">♡ Sofis Hub</span>
 
-          <h2>Conteúdo privado, acesso direto e experiências exclusivas.</h2>
+          <!-- CORREÇÃO: h1 aqui — é o título principal da página -->
+          <h1 id="hero-titulo">Conteúdo privado, acesso direto e experiências exclusivas.</h1>
 
           <p>
             Um espaço organizado para quem busca uma experiência mais discreta,
@@ -135,19 +160,27 @@
     </section>
 
     <!-- SOBRE -->
-    <section class="about-section" id="sobre">
+    <section class="about-section" id="sobre" aria-labelledby="sobre-titulo">
       <div class="container">
 
         <div class="about-heading">
-          <div class="about-icon">♡</div>
-          <h2>Sobre a Sofis</h2>
+          <div class="about-icon" aria-hidden="true">♡</div>
+          <h2 id="sobre-titulo">Sobre a Sofis</h2>
         </div>
 
         <div class="about-grid">
 
           <div class="about-image-card">
-            <img src="sofis.jpg" alt="Sofis Hub">
-            <span class="about-floating-icon">✦</span>
+            <!-- CORREÇÃO: alt descritivo, width/height, loading lazy, decoding async -->
+            <img
+              src="sofisa.jpg"
+              alt="Foto de perfil da Sofis"
+              width="520"
+              height="520"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="about-floating-icon" aria-hidden="true">✦</span>
           </div>
 
           <div class="about-side">
@@ -156,25 +189,24 @@
               <span class="about-label">Quem sou eu</span>
 
               <p>
-                Um espaço criado para oferecer uma experiência mais próxima,
-                privada e sem enrolação.
+                Oii amores!! Eu sou a Sofis ♡ comecei a criar conteúdo á alguns meses, e sempre me esforço ao máximo pra criar um momento único de prazer e tesão com meus clientes
               </p>
 
               <p>
-                A proposta do Sofis Hub é simples: organização, privacidade e
-                acesso rápido ao que realmente interessa.
+                Eu sou loirinha da bucetinha rosada, e eu tenho certeza que se você experimentar você vai amar... Eu sou MUITO safadinha, então não se assuste se as vezes eu exagerar um pouco, se é que você me entende 👿 
               </p>
             </div>
 
             <div class="about-extra">
               <div class="about-tags">
-                <span>Kawaii</span>
-                <span>Premium</span>
-                <span>Exclusiva</span>
-                <span>Conteúdo</span>
+                <span>Loirinha</span>
+                <span>Rabuda</span>
+                <span>18 aninhos</span>
+                <span>Safadinha</span>
               </div>
 
-              <a href="#sobre" class="btn btn-primary">
+              <!-- CORREÇÃO: link apontava para #sobre (própria seção). Ajuste conforme destino real -->
+              <a href="SobreMim.html" class="btn btn-primary">
                 Conhecer mais
               </a>
             </div>
@@ -186,35 +218,41 @@
     </section>
 
     <!-- CARDS -->
-    <section class="index-section">
+    <section class="index-section" aria-labelledby="cards-titulo">
       <div class="container">
 
-        <div class="section-heading">
-          <span>✦ Experiências</span>
-          <h2>Escolha seu acesso</h2>
-        </div>
+        <!-- Título visualmente oculto para leitores de tela caso não haja heading visível -->
+        <h2 id="cards-titulo" class="sr-only">Experiências disponíveis</h2>
 
         <div class="feature-grid">
 
-          <div class="feature-card">
+          <article class="feature-card featured">
+            <div class="feature-icon" aria-hidden="true">👑</div>
             <h3>VIP</h3>
-            <p>Experiência completa</p>
-          </div>
+            <p>A área principal para quem quer uma experiência mais completa e exclusiva.</p>
+            <a href="vip.html">Entrar no VIP →</a>
+          </article>
 
-          <div class="feature-card">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">◈</div>
             <h3>Packs</h3>
-            <p>Conteúdos organizados</p>
-          </div>
+            <p>Opções prontas e organizadas para acessar conteúdos selecionados.</p>
+            <a href="packs.html">Ver packs →</a>
+          </article>
 
-          <div class="feature-card">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">★</div>
             <h3>Serviços</h3>
-            <p>Personalizado</p>
-          </div>
+            <p>Experiências personalizadas e opções especiais sob medida.</p>
+            <a href="servicos.html">Ver serviços →</a>
+          </article>
 
-          <div class="feature-card">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">♡</div>
             <h3>Mimos</h3>
-            <p>Interações especiais</p>
-          </div>
+            <p>Uma área dedicada a presentes, agrados e interações mais pessoais.</p>
+            <a href="mimos.html">Ver mimos →</a>
+          </article>
 
         </div>
       </div>
@@ -224,7 +262,7 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <h2>Sofis<span>Hub</span></h2>
+      <p class="footer-logo">Sofis<span>Hub</span></p>
       <p>Plataforma exclusiva</p>
     </div>
   </footer>

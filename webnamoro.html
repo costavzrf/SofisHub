@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Webnamoro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (function () {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    }());
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    body { opacity: 0; visibility: hidden; }
+    html.dark-mode { background: #08090c; }
+    html.page-ready body { opacity: 1; visibility: visible; transition: opacity 0.15s ease; }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       WEBNAMORO PAGE
+    ══════════════════════════════════════════ */
+
+    /* ── HERO ───────────────────────────────── */
+    .wn-hero {
+      position: relative;
+      padding: 72px 0 80px;
+      overflow: hidden;
+    }
+
+    .wn-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wn-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .wn-orb-1 {
+      width: 560px; height: 560px;
+      top: -180px; right: -80px;
+      background: radial-gradient(circle, rgba(236,205,45,0.13), transparent 65%);
+    }
+
+    .wn-orb-2 {
+      width: 300px; height: 300px;
+      bottom: -80px; left: -60px;
+      background: radial-gradient(circle, rgba(236,205,45,0.07), transparent 65%);
+    }
+
+    .wn-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      opacity: 0.4;
+    }
+
+    .wn-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .wn-hero-text h1 {
+      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+      letter-spacing: -0.065em;
+      line-height: 0.97;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .wn-hero-text h1 em {
+      font-style: normal;
+      color: var(--yellow-dark);
+    }
+
+    .wn-hero-text p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 480px;
+      margin-bottom: 30px;
+      line-height: 1.68;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    html:not(.dark-mode) .trust-badge {
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    .trust-badge .tb-icon { color: var(--yellow-dark); }
+
+    /* Lado direito: frame da foto */
+    .wn-hero-frame-wrap {
+      position: relative;
+    }
+
+    .wn-hero-frame {
+      position: relative;
+      border-radius: 36px;
+      padding: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.14),
+        0 0 0 1px var(--border);
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .wn-hero-frame {
+      background: #fff;
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.10),
+        0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .wn-hero-frame img {
+      display: block;
+      width: 100%;
+      /* Desktop: altura fixa generosa */
+      height: 560px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 28px;
+    }
+
+    .wn-hero-frame-placeholder {
+      width: 100%;
+      height: 560px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--yellow-soft), rgba(236,205,45,0.04));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--yellow-dark);
+      font-size: 3.5rem;
+    }
+
+    .wn-frame-glow {
+      position: absolute;
+      inset: -1px;
+      border-radius: 36px;
+      background: linear-gradient(135deg,
+        rgba(236,205,45,0.26) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(236,205,45,0.12) 100%);
+      pointer-events: none;
+    }
+
+    .wn-hero-badge {
+      position: absolute;
+      bottom: -18px;
+      left: 24px;
+      right: 24px;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 2;
+    }
+
+    html:not(.dark-mode) .wn-hero-badge {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+    }
+
+    .wn-hero-badge-icon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .wn-hero-badge-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .wn-hero-badge-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .wn-stat {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+      backdrop-filter: blur(12px);
+      min-width: 80px;
+      text-align: center;
+      z-index: 3;
+    }
+
+    html:not(.dark-mode) .wn-stat {
+      background: rgba(255,255,255,0.96);
+    }
+
+    .wn-stat-icon { font-size: 13px; color: var(--yellow-dark); }
+    .wn-stat-num { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text); line-height: 1; }
+    .wn-stat-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+
+    .wn-stat-1 { top: 22px; left: -28px; animation: float-a 4s ease-in-out infinite; }
+    .wn-stat-2 { top: 50%; right: -28px; transform: translateY(-50%); animation: float-b 4.5s ease-in-out infinite; }
+
+    @keyframes float-a {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes float-b {
+      0%, 100% { transform: translateY(-50%); }
+      50% { transform: translateY(calc(-50% - 8px)); }
+    }
+
+    /* ── SECTION BADGE ──────────────────────── */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--yellow-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow-dark);
+      box-shadow: 0 0 10px rgba(236,205,45,0.55);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    /* ══════════════════════════════════════════
+       SEÇÃO COMO FUNCIONA — PERSUASIVA
+    ══════════════════════════════════════════ */
+    .wn-como {
+      padding: 90px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fundo sutil com gradiente */
+    .wn-como::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(236,205,45,0.03) 40%,
+        rgba(236,205,45,0.05) 60%,
+        transparent 100%);
+      pointer-events: none;
+    }
+
+    .wn-como-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .wn-como-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .wn-como-header h2 em {
+      font-style: normal;
+      color: var(--yellow-dark);
+    }
+
+    .wn-como-header p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.68;
+    }
+
+    /* Grid de benefícios — 3 colunas */
+    .wn-beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 52px;
+    }
+
+    .wn-beneficio-card {
+      position: relative;
+      padding: 36px 28px;
+      border-radius: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.26s ease, border-color 0.26s ease;
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .wn-beneficio-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      border: 1px solid rgba(20,20,20,0.13);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.10), 0 4px 14px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .wn-beneficio-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(236,205,45,0.07), transparent 55%);
+      pointer-events: none;
+    }
+
+    .wn-beneficio-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(236,205,45,0.38);
+    }
+
+    .wn-beneficio-icon {
+      width: 52px; height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      background: var(--yellow-soft);
+      border: 1px solid var(--border);
+      font-size: 1.5rem;
+    }
+
+    .wn-beneficio-card h3 {
+      font-size: 1.14rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .wn-beneficio-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    /* Passo a passo — card único com 3 etapas */
+    .wn-steps-card {
+      position: relative;
+      border-radius: 32px;
+      border: 1px solid rgba(236,205,45,0.32);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 46px 52px;
+    }
+
+    html:not(.dark-mode) .wn-steps-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      border: 1px solid rgba(214,184,58,0.26);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    .wn-steps-card-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(236,205,45,0.10), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(236,205,45,0.06), transparent 40%);
+      pointer-events: none;
+    }
+
+    .wn-steps-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wn-steps-header h3 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      letter-spacing: -0.045em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .wn-steps-header p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      max-width: 480px;
+    }
+
+    .wn-steps-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    /* Linha conectora entre os passos */
+    .wn-steps-row::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: calc(16.66% + 12px);
+      right: calc(16.66% + 12px);
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(236,205,45,0.5),
+        rgba(236,205,45,0.2) 50%,
+        rgba(236,205,45,0.5));
+      z-index: 0;
+    }
+
+    .wn-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .wn-step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #181300;
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(212,160,23,0.32);
+      flex-shrink: 0;
+    }
+
+    .wn-step h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .wn-step p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PLANOS ─────────────────────────────── */
+    .wn-plans { padding: 10px 0 80px; }
+
+    .wn-plans-header { margin-bottom: 40px; }
+
+    .wn-plans-header h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.055em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .wn-plans-header p { color: var(--muted); font-size: 1rem; }
+
+    .wn-featured-plan {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+      padding: 46px 52px;
+      border-radius: 32px;
+      border: 1px solid rgba(236,205,45,0.38);
+      background: var(--bg-card);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.14), 0 0 0 1px rgba(236,205,45,0.10);
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .wn-featured-plan {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.11), 0 0 0 1px rgba(214,184,58,0.22);
+    }
+
+    .wn-featured-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(236,205,45,0.12), transparent 48%),
+        radial-gradient(circle at bottom left, rgba(236,205,45,0.06), transparent 40%);
+      pointer-events: none;
+    }
+
+    .wn-featured-left { position: relative; z-index: 1; }
+
+    .wn-featured-tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .wn-plan-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--yellow-dark);
+    }
+
+    .wn-best-pill {
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      color: #181300;
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .wn-promo-pill {
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: rgba(236,205,45,0.15);
+      border: 1px solid rgba(236,205,45,0.3);
+      color: var(--yellow-dark);
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .wn-featured-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .wn-featured-left > p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.62;
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+
+    .wn-items {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 32px;
+    }
+
+    .wn-items li {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .wn-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      color: #181300;
+      font-weight: 900;
+    }
+
+    .wn-featured-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      min-width: 210px;
+      text-align: center;
+    }
+
+    .wn-price-old {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .wn-price-label {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .wn-price-big {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--yellow-dark);
+      line-height: 1;
+    }
+
+    .wn-price-big small { font-size: 1.4rem; font-weight: 700; }
+
+    .wn-plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .wn-plan-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      transition: transform 0.26s ease, border-color 0.26s ease;
+    }
+
+    html:not(.dark-mode) .wn-plan-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      border: 1px solid rgba(20,20,20,0.13);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .wn-plan-card:hover { transform: translateY(-6px); border-color: rgba(236,205,45,0.42); }
+
+    .wn-plan-card-header {
+      padding: 26px 26px 20px;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(circle at top right, rgba(236,205,45,0.08), transparent 55%);
+    }
+
+    .wn-plan-duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--yellow-soft);
+      border: 1px solid rgba(236,205,45,0.22);
+      color: var(--yellow-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .wn-plan-card-header h3 {
+      font-size: 1.18rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .wn-plan-card-header p { color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+
+    .wn-plan-card-body {
+      padding: 20px 26px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .wn-plan-items-label {
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--yellow-dark);
+      margin-bottom: 12px;
+    }
+
+    .wn-plan-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .wn-plan-items li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .wn-plan-items li::before {
+      content: "✦";
+      color: var(--yellow-dark);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .wn-plan-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .wn-plan-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--yellow-dark);
+      line-height: 1;
+    }
+
+    .wn-plan-price small { font-size: 1rem; font-weight: 700; }
+    .wn-plan-period { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+    /* ── CTA FINAL ───────────────────────────── */
+    .wn-cta { padding: 0 0 90px; }
+
+    .cta-box {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 64px 40px;
+      border-radius: 36px;
+      border: 1px solid rgba(236,205,45,0.3);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .cta-box { background: #fff; border-color: rgba(20,20,20,0.12); }
+
+    .cta-orbs { position: absolute; inset: 0; pointer-events: none; }
+
+    .co { position: absolute; border-radius: 50%; filter: blur(70px); }
+
+    .co-1 { width: 300px; height: 300px; top: -80px; left: -60px; background: radial-gradient(circle, rgba(236,205,45,0.16), transparent); }
+    .co-2 { width: 250px; height: 250px; bottom: -70px; right: -50px; background: radial-gradient(circle, rgba(236,205,45,0.12), transparent); }
+
+    .cta-box h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.055em;
+      line-height: 1.08;
+      margin: 14px 0 12px;
+      color: var(--text);
+    }
+
+    .cta-box p { color: var(--muted); font-size: 1.04rem; max-width: 480px; margin: 0 auto 28px; }
+
+    /* ── RESPONSIVO ──────────────────────────── */
+    @media (max-width: 1040px) {
+      .wn-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .wn-hero-text {
+        text-align: center;
+      }
+
+      .wn-hero-text p { margin-left: auto; margin-right: auto; }
+      .wn-hero-text .hero-actions { justify-content: center; }
+      .trust-badges { justify-content: center; }
+
+      .wn-hero-frame-wrap {
+        max-width: 460px;
+        margin: 0 auto;
+      }
+
+      /* No tablet/1col: imagem mantém altura razoável */
+      .wn-hero-frame img {
+        height: 480px;
+        object-position: top center;
+      }
+
+      .wn-hero-frame-placeholder { height: 480px; }
+
+      .wn-stat-1 { left: -16px; }
+      .wn-stat-2 { right: -16px; }
+
+      .wn-beneficios-grid { grid-template-columns: 1fr 1fr; }
+
+      .wn-steps-card { padding: 36px 32px; }
+      .wn-steps-row::before { display: none; }
+      .wn-steps-row {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .wn-step { flex-direction: row; text-align: left; gap: 20px; align-items: flex-start; }
+      .wn-step-num { flex-shrink: 0; margin-bottom: 0; }
+
+      .wn-featured-plan {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 36px 32px;
+      }
+
+      .wn-items { grid-template-columns: 1fr; }
+
+      .wn-featured-right {
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: unset;
+        width: 100%;
+        text-align: left;
+        align-items: center;
+      }
+
+      .wn-plans-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wn-hero { padding: 44px 0 60px; }
+
+      /* CORREÇÃO: imagem não achatada no mobile — forçar proporção natural */
+      .wn-hero-frame {
+        border-radius: 28px;
+        padding: 8px;
+      }
+
+      .wn-hero-frame img {
+        width: 100% !important;
+        height: auto !important;
+        min-height: unset !important;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: top center;
+        border-radius: 22px;
+      }
+
+      .wn-hero-frame-placeholder {
+        aspect-ratio: 3 / 4;
+        height: auto !important;
+      }
+
+      .wn-stat { display: none; }
+      .wn-hero-badge { left: 14px; right: 14px; }
+
+      .wn-como { padding: 60px 0 50px; }
+      .wn-beneficios-grid { grid-template-columns: 1fr; }
+      .wn-steps-card { padding: 28px 22px; }
+
+      .wn-featured-plan { padding: 26px 22px; }
+
+      .wn-featured-right {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .wn-featured-right .btn { width: 100%; }
+      .wn-price-big { font-size: 2.4rem; }
+      .wn-plans-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 40px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <header class="header">
+    <div class="container nav">
+      <div class="logo"><a href="index.html">Sofis<span>Hub</span></a></div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html" class="ativo" aria-current="page">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu-panel" id="mobileMenuPanel"
+      aria-label="Menu mobile" aria-hidden="true">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html" aria-current="page">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ══ HERO ══════════════════════════════════════════════ -->
+    <section class="wn-hero" aria-labelledby="wn-hero-titulo">
+      <div class="wn-hero-bg" aria-hidden="true">
+        <div class="wn-orb wn-orb-1"></div>
+        <div class="wn-orb wn-orb-2"></div>
+        <div class="wn-grid"></div>
+      </div>
+
+      <div class="container wn-hero-inner">
+
+        <div class="wn-hero-text">
+          <span class="hero-pill">♡ Webnamoro</span>
+          <h1 id="wn-hero-titulo">Sua namoradinha<br><em>virtual</em>,<br>do seu jeito.</h1>
+          <p>Uma conexão carinhosa, próxima e personalizada. Presença diária, momentos especiais e muito carinho — tudo combinado para você.</p>
+          <div class="hero-actions">
+            <a href="#planos" class="btn btn-primary">Quero namorar ♡</a>
+            <a href="#como-funciona" class="btn btn-secondary">Ver planos</a>
+          </div>
+          <div class="trust-badges" role="list">
+            <span class="trust-badge" role="listitem"><span class="tb-icon">♡</span> Atenção exclusiva</span>
+            <span class="trust-badge" role="listitem"><span class="tb-icon">🔒</span> 100% discreto</span>
+            <span class="trust-badge" role="listitem"><span class="tb-icon">✦</span> Personalizado</span>
+            <span class="trust-badge" role="listitem"><span class="tb-icon">⚡</span> Início imediato</span>
+          </div>
+        </div>
+
+        <div class="wn-hero-frame-wrap" aria-hidden="true">
+          <div class="wn-stat wn-stat-1">
+            <span class="wn-stat-icon">♡</span>
+            <span class="wn-stat-num">100%</span>
+            <span class="wn-stat-label">Exclusivo</span>
+          </div>
+          <div class="wn-stat wn-stat-2">
+            <span class="wn-stat-icon">✦</span>
+            <span class="wn-stat-num">24h</span>
+            <span class="wn-stat-label">Presença</span>
+          </div>
+
+          <div class="wn-hero-frame">
+            <img
+              src="sofis.jpg"
+              alt="Foto da Sofis para o Webnamoro"
+              width="480"
+              loading="eager"
+              decoding="async"
+              onerror="this.style.display='none';document.getElementById('wn-placeholder').style.display='flex';"
+            />
+            <div class="wn-hero-frame-placeholder" id="wn-placeholder" style="display:none;">
+              <span>♡</span>
+            </div>
+            <div class="wn-frame-glow"></div>
+          </div>
+
+          <div class="wn-hero-badge">
+            <div class="wn-hero-badge-icon">♡</div>
+            <div class="wn-hero-badge-text">
+              <strong>Webnamoro</strong>
+              <span>Seja meu namorado virtual!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ COMO FUNCIONA — PERSUASIVO ════════════════════════ -->
+    <section class="wn-como" id="como-funciona" aria-labelledby="wn-como-titulo">
+      <div class="container">
+
+        <div class="wn-como-header">
+          <div class="section-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Por que vai funcionar pra você
+          </div>
+          <h2 id="wn-como-titulo">O que você ganha sendo<br>meu <em>namorado virtual</em></h2>
+          <p>Não é só conversa. É atenção de verdade, conteúdo exclusivo e uma experiência feita sob medida pra te deixar animado todo dia.</p>
+        </div>
+
+        <!-- Grid de benefícios -->
+        <div class="wn-beneficios-grid">
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">♡</div>
+            <h3>Atenção só sua</h3>
+            <p>Durante o período contratado, você é prioridade. Conversas diárias, respostas rápidas e presença constante — sem te deixar no vácuo.</p>
+          </article>
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">📸</div>
+            <h3>Conteúdo exclusivo</h3>
+            <p>Fotinhas e vídeos do meu dia a dia que só você recebe. Momentos especiais criados pra te surpreender e manter aquele frio na barriga.</p>
+          </article>
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">🎮</div>
+            <h3>Momentos reais juntos</h3>
+            <p>Joguinhos online, chamadas de vídeo e lives privadas. A gente cria memórias juntos do jeito que você quiser — no ritmo certo pra você.</p>
+          </article>
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">🔒</div>
+            <h3>Privacidade total</h3>
+            <p>Tudo acontece de forma discreta e segura. Nenhum detalhe sai daqui. Você pode relaxar e curtir sem nenhuma preocupação.</p>
+          </article>
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">✦</div>
+            <h3>Totalmente personalizado</h3>
+            <p>Antes de começar, a gente combina como você quer que seja. Do tom da conversa ao que gosta de receber — tudo moldado pra você.</p>
+          </article>
+
+          <article class="wn-beneficio-card">
+            <div class="wn-beneficio-icon" aria-hidden="true">⚡</div>
+            <h3>Começa hoje mesmo</h3>
+            <p>Sem burocracia. Escolheu o plano, pagou e já começa. Resposta rápida no WhatsApp e a primeira mensagem carinhosa é sua em minutos.</p>
+          </article>
+
+        </div>
+
+        <!-- Passo a passo -->
+        <div class="wn-steps-card">
+          <div class="wn-steps-card-bg" aria-hidden="true"></div>
+
+          <div class="wn-steps-header">
+            <div class="section-badge">
+              <span class="badge-dot" aria-hidden="true"></span>
+              É simples assim
+            </div>
+            <h3>3 passos pra começar a namorar</h3>
+            <p>Não precisa de cadastro, perfil ou burocracia. Em menos de 5 minutos você já está dentro.</p>
+          </div>
+
+          <div class="wn-steps-row">
+
+            <div class="wn-step">
+              <div class="wn-step-num" aria-hidden="true">1</div>
+              <div>
+                <h4>Escolha seu período</h4>
+                <p>1 dia pra experimentar, 2 dias, 1 semana ou o mês completo. Quanto mais tempo, mais intenso e especial fica.</p>
+              </div>
+            </div>
+
+            <div class="wn-step">
+              <div class="wn-step-num" aria-hidden="true">2</div>
+              <div>
+                <h4>Me chama no WhatsApp</h4>
+                <p>Clique no botão, me manda uma mensagem e a gente combina tudo ali mesmo. Rápido, direto e sem complicação.</p>
+              </div>
+            </div>
+
+            <div class="wn-step">
+              <div class="wn-step-num" aria-hidden="true">3</div>
+              <div>
+                <h4>Aproveite o namoro</h4>
+                <p>Pagou, começou. A partir daí é só curtir a atenção, o conteúdo e os momentos especiais que vou criar só pra você.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ PLANOS ═════════════════════════════════════════════ -->
+    <section class="wn-plans" id="planos" aria-labelledby="wn-plans-titulo">
+      <div class="container">
+        <div class="wn-plans-header">
+          <div class="section-badge"><span class="badge-dot" aria-hidden="true"></span>Escolha seu plano</div>
+          <h2 id="wn-plans-titulo">Quanto tempo você quer?</h2>
+          <p>Do experimento de um dia à experiência completa de um mês.</p>
+        </div>
+
+        <article class="wn-featured-plan" aria-labelledby="plan-mes-titulo">
+          <div class="wn-featured-bg" aria-hidden="true"></div>
+          <div class="wn-featured-left">
+            <div class="wn-featured-tags">
+              <span class="wn-plan-label">Plano em destaque</span>
+              <span class="wn-best-pill">⭐ Melhor valor</span>
+              <span class="wn-promo-pill">Promoção</span>
+            </div>
+            <h2 id="plan-mes-titulo">1 Mês Completo</h2>
+            <p>A melhor experiência pra quem quer me ter totalmente presente durante um mês inteiro, com tudo que cada dia merece.</p>
+            <ul class="wn-items" aria-label="O que inclui no plano mensal">
+              <li><span class="wn-check" aria-hidden="true">✓</span> Chamada de vídeo toda semana</li>
+              <li><span class="wn-check" aria-hidden="true">✓</span> Conversas à vontade</li>
+              <li><span class="wn-check" aria-hidden="true">✓</span> Acesso mensal ao VIP</li>
+              <li><span class="wn-check" aria-hidden="true">✓</span> Fotinhas e vídeos do dia a dia</li>
+              <li><span class="wn-check" aria-hidden="true">✓</span> Joguinhos juntos</li>
+              <li><span class="wn-check" aria-hidden="true">✓</span> 1 pack de sua escolha</li>
+            </ul>
+          </div>
+          <div class="wn-featured-right">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span class="wn-price-label">Oferta especial</span>
+              <span class="wn-price-old">De R$ 199,90</span>
+              <span class="wn-price-big"><small>R$</small> 149<small style="font-size:1.1rem">,90</small></span>
+            </div>
+            <a href="checkout.html?produto=webnamoro-mes" class="btn btn-primary">
+              Escolher plano ♡
+            </a>
+          </div>
+        </article>
+
+        <div class="wn-plans-grid">
+          <article class="wn-plan-card" aria-labelledby="plan-dia-titulo">
+            <div class="wn-plan-card-header">
+              <span class="wn-plan-duration">⏱ 1 dia</span>
+              <h3 id="plan-dia-titulo">1 Dia Completo</h3>
+              <p>Pra quem quer experimentar e sentir como é ter minha presença.</p>
+            </div>
+            <div class="wn-plan-card-body">
+              <p class="wn-plan-items-label">O que inclui</p>
+              <ul class="wn-plan-items">
+                <li>Conversa por 24h</li>
+                <li>Fotinhas exclusivas</li>
+                <li>Áudios carinhosos</li>
+                <li>Presença o dia todo</li>
+              </ul>
+              <div class="wn-plan-price-row">
+                <div class="wn-plan-price"><small>R$</small> 49<small style="font-size:0.85rem">,90</small></div>
+                <span class="wn-plan-period">por dia</span>
+              </div>
+              <a href="checkout.html?produto=webnamoro-dia" class="btn btn-secondary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+
+          <article class="wn-plan-card" aria-labelledby="plan-dois-dias-titulo">
+            <div class="wn-plan-card-header">
+              <span class="wn-plan-duration">⏱ 2 dias</span>
+              <h3 id="plan-dois-dias-titulo">2 Dias Completos</h3>
+              <p>Um fim de semana inteiro comigo, com momentos especiais.</p>
+            </div>
+            <div class="wn-plan-card-body">
+              <p class="wn-plan-items-label">O que inclui</p>
+              <ul class="wn-plan-items">
+                <li>Conversa por 48h</li>
+                <li>Fotinhas e vídeos exclusivos</li>
+                <li>Áudios carinhosos</li>
+                <li>Presença constante</li>
+              </ul>
+              <div class="wn-plan-price-row">
+                <div class="wn-plan-price"><small>R$</small> 59<small style="font-size:0.85rem">,90</small></div>
+                <span class="wn-plan-period">por 2 dias</span>
+              </div>
+              <a href="checkout.html?produto=webnamoro-dois-dias" class="btn btn-secondary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+
+          <article class="wn-plan-card" aria-labelledby="plan-semana-titulo">
+            <div class="wn-plan-card-header">
+              <span class="wn-plan-duration">⏱ 1 semana</span>
+              <h3 id="plan-semana-titulo">1 Semana Completa</h3>
+              <p>Sete dias com presença garantida e momentos feitos pra você.</p>
+            </div>
+            <div class="wn-plan-card-body">
+              <p class="wn-plan-items-label">O que inclui</p>
+              <ul class="wn-plan-items">
+                <li>Conversa por 7 dias</li>
+                <li>Fotinhas e vídeos diários</li>
+                <li>1 chamada de vídeo</li>
+                <li>Joguinhos juntos</li>
+              </ul>
+              <div class="wn-plan-price-row">
+                <div class="wn-plan-price"><small>R$</small> 89<small style="font-size:0.85rem">,90</small></div>
+                <span class="wn-plan-period">por semana</span>
+              </div>
+              <a href="checkout.html?produto=webnamoro-semana" class="btn btn-secondary" style="width:100%;justify-content:center;">
+                Quero esse ♡
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CTA FINAL ════════════════════════════════════════ -->
+    <section class="wn-cta" aria-labelledby="wn-cta-titulo">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-orbs" aria-hidden="true">
+            <div class="co co-1"></div>
+            <div class="co co-2"></div>
+          </div>
+          <span class="hero-pill">✦ Comece agora</span>
+          <h2 id="wn-cta-titulo">Pronto pra me ter por perto?</h2>
+          <p>Escolha seu plano, me chama no WhatsApp e a gente começa hoje mesmo.</p>
+          <div class="hero-actions" style="justify-content:center">
+            <a href="https://wa.me/seunumero?text=Quero%20saber%20mais%20sobre%20o%20Webnamoro" class="btn btn-primary" target="_blank" rel="noopener">Começar agora ♡</a>
+            <a href="packs.html" class="btn btn-secondary">Ver packs também</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-logo">Sofis<span>Hub</span></p>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sofis Hub | Finalizar Pedido</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.classList.add("dark-mode");
+    })();
+  </script>
+
+  <style>
+    html { background: #ffffff; }
+    html.dark-mode { background: #08090c; }
+    body { opacity: 0; visibility: hidden; }
+    html.page-ready body {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.15s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       CHECKOUT PAGE
+    ══════════════════════════════════════════ */
+
+    /* ── HERO STRIP ─────────────────────────── */
+    .ck-hero {
+      position: relative;
+      padding: 52px 0 48px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .ck-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .ck-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .ck-orb-1 {
+      width: 420px; height: 420px;
+      top: -180px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(236,205,45,0.14), transparent 65%);
+    }
+
+    .ck-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+      opacity: 0.35;
+    }
+
+    .ck-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ck-hero-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-size: 1.6rem;
+      box-shadow: 0 0 40px rgba(236,205,45,0.3);
+      animation: hero-pulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes hero-pulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(236,205,45,0.3); }
+      50% { box-shadow: 0 0 65px rgba(236,205,45,0.5); }
+    }
+
+    .ck-hero-inner h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -0.055em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .ck-hero-inner p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* ── TIMER ──────────────────────────────── */
+    .ck-timer-wrap {
+      padding: 14px 0 0;
+    }
+
+    .ck-timer-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid rgba(236,205,45,0.32);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.10), 0 0 0 1px rgba(236,205,45,0.10);
+    }
+
+    html:not(.dark-mode) .ck-timer-bar {
+      background: #fff;
+    }
+
+    .ck-timer-icon {
+      font-size: 1.1rem;
+      color: var(--yellow-dark);
+      animation: spin-slow 8s linear infinite;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .ck-timer-text {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .ck-timer-countdown {
+      font-size: 1.28rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--yellow-dark);
+    }
+
+    /* ── LAYOUT PRINCIPAL ───────────────────── */
+    .ck-main {
+      padding: 48px 0 80px;
+    }
+
+    .ck-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 26px;
+      align-items: start;
+    }
+
+    /* ── CARD BASE ──────────────────────────── */
+    .ck-card {
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    html:not(.dark-mode) .ck-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      border: 1px solid rgba(20,20,20,0.13);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,0.10),
+        0 4px 14px rgba(0,0,0,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .ck-card-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(circle at top right, rgba(236,205,45,0.08), transparent 55%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .ck-card-header h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .ck-card-header .ck-step {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: #181300;
+      flex-shrink: 0;
+    }
+
+    /* ── RESUMO DO PEDIDO ───────────────────── */
+    .ck-product-row {
+      padding: 24px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ck-product-thumb {
+      position: relative;
+      width: 80px; height: 80px;
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--yellow-soft);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+    }
+
+    .ck-product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      filter: blur(6px) brightness(0.7);
+    }
+
+    .ck-product-thumb .thumb-lock {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      z-index: 2;
+    }
+
+    /* Sem imagem: placeholder */
+    .ck-product-thumb .thumb-placeholder {
+      font-size: 2rem;
+    }
+
+    .ck-product-info {
+      flex: 1;
+    }
+
+    .ck-product-info .ck-prod-name {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .ck-product-info .ck-prod-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .ck-product-info .ck-prod-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--yellow-dark);
+      letter-spacing: -0.03em;
+    }
+
+    /* Preview blur */
+    .ck-preview {
+      padding: 0 28px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ck-preview-frame {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--yellow-soft);
+      border: 1px solid var(--border);
+    }
+
+    .ck-preview-frame img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: blur(14px) brightness(0.55) saturate(0.8);
+      transform: scale(1.08);
+    }
+
+    .ck-preview-placeholder {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, var(--yellow-soft), rgba(236,205,45,0.04));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--yellow-dark);
+      font-size: 2.5rem;
+    }
+
+    .ck-preview-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(0,0,0,0.22);
+    }
+
+    .ck-preview-lock {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(236,205,45,0.35);
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+    }
+
+    .ck-preview-caption {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Itens inclusos */
+    .ck-includes {
+      padding: 22px 28px 26px;
+    }
+
+    .ck-includes-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--yellow-dark);
+      margin-bottom: 14px;
+    }
+
+    .ck-includes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px 16px;
+    }
+
+    .ck-inc-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .ck-inc-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 0.6rem;
+      color: #181300;
+      font-weight: 900;
+    }
+
+    /* ── PAGAMENTO ──────────────────────────── */
+    .ck-pay-body {
+      padding: 24px 28px;
+    }
+
+    /* Linha preço */
+    .ck-price-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .ck-price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .ck-price-line .ck-pl-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .ck-price-line .ck-pl-val {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .ck-price-line.is-total {
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .ck-price-line.is-total .ck-pl-label {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .ck-price-line.is-total .ck-pl-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--yellow-dark);
+    }
+
+    /* Métodos */
+    .ck-methods-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--yellow-dark);
+      margin-bottom: 10px;
+    }
+
+    .ck-methods {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .ck-method {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 2px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    html:not(.dark-mode) .ck-method {
+      background: #fafafa;
+    }
+
+    .ck-method.selected {
+      border-color: var(--yellow-dark);
+      color: var(--yellow-dark);
+      background: var(--yellow-soft);
+    }
+
+    .ck-method .ck-method-icon { font-size: 1.1rem; }
+
+    /* CTA principal */
+    .btn-checkout {
+      width: 100%;
+      padding: 17px 22px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff3a3 0%, #eccd2d 48%, #d9a900 100%);
+      color: #181300;
+      font-size: 1.02rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      transition: 0.25s ease;
+      box-shadow:
+        0 10px 28px rgba(217,169,0,0.28),
+        0 0 0 1px rgba(236,205,45,0.18);
+      text-decoration: none;
+    }
+
+    .btn-checkout:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 18px 40px rgba(217,169,0,0.34),
+        0 0 0 1px rgba(236,205,45,0.26);
+    }
+
+    /* Segurança */
+    .ck-secure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--yellow-soft);
+      border: 1px solid rgba(236,205,45,0.22);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--yellow-dark);
+      margin-bottom: 18px;
+    }
+
+    /* Suporte */
+    .ck-support {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .ck-support a {
+      color: var(--yellow-dark);
+      font-weight: 800;
+    }
+
+    .pix-panel {
+      display: none;
+      margin: 0 0 18px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(236,205,45,0.26);
+      background: radial-gradient(circle at top left, rgba(236,205,45,0.12), transparent 58%), var(--bg-card);
+    }
+
+    .pix-panel.active { display: block; }
+
+    html:not(.dark-mode) .pix-panel {
+      background: radial-gradient(circle at top left, rgba(236,205,45,0.15), transparent 58%), #fffaf0;
+    }
+
+    .pix-status {
+      color: var(--yellow-dark);
+      font-weight: 900;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .pix-qr {
+      width: 220px;
+      max-width: 100%;
+      display: none;
+      margin: 0 auto 14px;
+      border-radius: 16px;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .pix-copy-label {
+      display: none;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .pix-copy-code {
+      display: none;
+      width: 100%;
+      min-height: 96px;
+      resize: vertical;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg-card) 92%, #000 8%);
+      color: var(--text);
+      padding: 12px;
+      font: 600 0.78rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin-bottom: 10px;
+    }
+
+    html:not(.dark-mode) .pix-copy-code {
+      background: #fff;
+    }
+
+    .pix-copy-btn {
+      display: none;
+      width: 100%;
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(236,205,45,0.32);
+      background: var(--yellow-soft);
+      color: var(--yellow-dark);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .pix-order {
+      display: none;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      word-break: break-all;
+    }
+
+    /* ── COMO FUNCIONA ──────────────────────── */
+    .ck-steps-section {
+      padding: 0 0 80px;
+    }
+
+    .ck-steps-header {
+      margin-bottom: 28px;
+    }
+
+    .ck-steps-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.05em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .ck-steps-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--yellow-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow-dark);
+      box-shadow: 0 0 10px rgba(236,205,45,0.55);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    .ck-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ck-step-card {
+      position: relative;
+      padding: 32px 26px;
+      border-radius: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.26s ease;
+    }
+
+    html:not(.dark-mode) .ck-step-card {
+      background: linear-gradient(180deg, #fff 0%, #fffdf5 100%);
+      border: 1px solid rgba(20,20,20,0.12);
+      box-shadow:
+        0 18px 45px rgba(0,0,0,0.09),
+        0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .ck-step-card:hover { transform: translateY(-5px); }
+
+    .ck-step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff3a3, #eccd2d);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #181300;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(236,205,45,0.28);
+    }
+
+    .ck-step-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .ck-step-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Connector line between steps */
+    .ck-steps-grid {
+      position: relative;
+    }
+
+    /* ── RESPONSIVO ──────────────────────────── */
+    @media (max-width: 1040px) {
+      .ck-grid-layout {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .ck-steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .ck-hero { padding: 38px 0 34px; }
+
+      .ck-timer-bar {
+        padding: 12px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 20px;
+      }
+
+      .ck-card-header,
+      .ck-product-row,
+      .ck-preview,
+      .ck-includes,
+      .ck-pay-body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .ck-includes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ck-step-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+      <div class="logo">
+        <a href="index.html">Sofis<span>Hub</span></a>
+      </div>
+
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="SobreMim.html">Sobre mim</a></li>
+          <li><a href="amostras.html">Amostras</a></li>
+          <li><a href="packs.html">Packs</a></li>
+          <li><a href="vip.html">VIP</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="webnamoro.html">Webnamoro</a></li>
+          <li><a href="mimos.html">Mimos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="vip.html" class="btn btn-nav">Acesso VIP</a>
+
+        <button class="theme-switch" id="themeToggle" aria-label="Alternar tema">
+          <span class="switch-bg"></span>
+          <span class="switch-moon-shade"></span>
+          <span class="switch-cloud cloud-1"></span>
+          <span class="switch-cloud cloud-2"></span>
+          <span class="switch-cloud cloud-3"></span>
+          <span class="switch-stars"></span>
+          <span class="switch-thumb"></span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu-panel" id="mobileMenuPanel"
+      aria-label="Menu mobile" aria-hidden="true">
+      <a href="index.html">Início</a>
+      <a href="SobreMim.html">Sobre mim</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+      <a href="mimos.html">Mimos</a>
+      <a href="vip.html" class="mobile-cta">Acesso VIP</a>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <!-- ══ HERO ══════════════════════════════════════════════ -->
+    <section class="ck-hero" aria-labelledby="ck-hero-titulo">
+      <div class="ck-hero-bg" aria-hidden="true">
+        <div class="ck-orb ck-orb-1"></div>
+        <div class="ck-grid"></div>
+      </div>
+      <div class="container ck-hero-inner">
+        <div class="ck-hero-icon" aria-hidden="true">✦</div>
+        <h1 id="ck-hero-titulo">Finalize seu pedido</h1>
+        <p>Você está a um passo de garantir seu conteúdo exclusivo.</p>
+
+        <!-- Timer -->
+        <div class="ck-timer-wrap">
+          <div class="ck-timer-bar" role="timer" aria-live="polite" aria-label="Tempo restante para a oferta">
+            <span class="ck-timer-icon" aria-hidden="true">⏱</span>
+            <span class="ck-timer-text">Oferta reservada por:</span>
+            <span class="ck-timer-countdown" id="ck-timer">15:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CHECKOUT GRID ════════════════════════════════════ -->
+    <section class="ck-main" aria-label="Checkout">
+      <div class="container">
+        <div class="ck-grid-layout">
+
+          <!-- COLUNA ESQUERDA: Resumo do Pedido -->
+          <div>
+            <div class="ck-card" aria-label="Resumo do pedido">
+              <div class="ck-card-header">
+                <h2>Resumo do pedido</h2>
+                <span class="ck-step" aria-hidden="true">1</span>
+              </div>
+
+              <!-- Produto -->
+              <div class="ck-product-row">
+                <div class="ck-product-thumb" aria-hidden="true">
+                  <img id="ck-thumb-img" src="" alt="" />
+                  <span class="thumb-lock" id="ck-thumb-icon">🔒</span>
+                </div>
+                <div class="ck-product-info">
+                  <p class="ck-prod-name" id="ck-prod-name">Pack</p>
+                  <p class="ck-prod-desc" id="ck-prod-desc">Conteúdo exclusivo e sem censura</p>
+                  <p class="ck-prod-price" id="ck-prod-price">R$ —</p>
+                </div>
+              </div>
+
+              <!-- Preview blur -->
+              <div class="ck-preview">
+                <div class="ck-preview-frame">
+                  <img id="ck-preview-img" src="" alt="" />
+                  <div class="ck-preview-placeholder" id="ck-preview-placeholder" aria-hidden="true">
+                    <span>✦</span>
+                  </div>
+                  <div class="ck-preview-overlay" aria-hidden="true">
+                    <div class="ck-preview-lock">🔒</div>
+                    <p class="ck-preview-caption">Desbloqueie após o pagamento</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Itens inclusos -->
+              <div class="ck-includes">
+                <p class="ck-includes-label">O que você vai receber</p>
+                <div class="ck-includes-grid" id="ck-includes-grid">
+                  <!-- preenchido via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUNA DIREITA: Pagamento -->
+          <div>
+            <div class="ck-card" aria-label="Pagamento">
+              <div class="ck-card-header">
+                <h2>Pagamento</h2>
+                <span class="ck-step" aria-hidden="true">2</span>
+              </div>
+
+              <div class="ck-pay-body">
+
+                <!-- Preços -->
+                <div class="ck-price-lines">
+                  <div class="ck-price-line">
+                    <span class="ck-pl-label">Subtotal</span>
+                    <span class="ck-pl-val" id="ck-subtotal">R$ —</span>
+                  </div>
+                  <div class="ck-price-line">
+                    <span class="ck-pl-label">Taxa de processamento</span>
+                    <span class="ck-pl-val" style="color:var(--yellow-dark);font-weight:800;">R$ 0,00</span>
+                  </div>
+                  <div class="ck-price-line is-total">
+                    <span class="ck-pl-label">Total</span>
+                    <span class="ck-pl-val" id="ck-total">R$ —</span>
+                  </div>
+                </div>
+
+                <!-- Métodos -->
+                <p class="ck-methods-label">Método de pagamento</p>
+                <div class="ck-methods" role="group" aria-label="Selecione o método de pagamento">
+                  <button class="ck-method selected" data-method="pix" aria-pressed="true">
+                    <span class="ck-method-icon">⚡</span> PIX
+                  </button>
+                  <button class="ck-method" data-method="cartao" aria-pressed="false">
+                    <span class="ck-method-icon">💳</span> Cartão
+                  </button>
+                </div>
+
+                <!-- CTA -->
+                <button type="button" id="ck-cta-btn" class="btn-checkout" aria-label="Gerar Pix para finalizar compra">
+                  <span>Gerar PIX</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+
+                <div class="pix-panel" id="ck-pix-panel" aria-live="polite">
+                  <p class="pix-status" id="ck-pix-status">Aguardando geração do PIX.</p>
+                  <img class="pix-qr" id="ck-pix-qr" alt="QR Code PIX" />
+                  <label class="pix-copy-label" id="ck-pix-label" for="ck-pix-code">Pix copia e cola</label>
+                  <textarea class="pix-copy-code" id="ck-pix-code" readonly></textarea>
+                  <button type="button" class="pix-copy-btn" id="ck-pix-copy">Copiar código PIX</button>
+                  <p class="pix-order" id="ck-pix-order"></p>
+                </div>
+
+                <!-- Seguro -->
+                <div class="ck-secure" role="note">
+                  <span>🔒</span> Pagamento 100% seguro e confidencial
+                </div>
+
+                <!-- Suporte -->
+                <p class="ck-support">
+                  Precisa de ajuda?
+                  <a href="https://wa.me/seunumero" target="_blank" rel="noopener">Fale comigo no WhatsApp</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ COMO FUNCIONA ════════════════════════════════════ -->
+    <section class="ck-steps-section" aria-labelledby="ck-steps-titulo">
+      <div class="container">
+
+        <div class="ck-steps-header">
+          <div class="section-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Simples assim
+          </div>
+          <h2 id="ck-steps-titulo">Como funciona?</h2>
+          <p>Três passos e o conteúdo é seu.</p>
+        </div>
+
+        <div class="ck-steps-grid">
+
+          <article class="ck-step-card">
+            <div class="ck-step-num" aria-hidden="true">1</div>
+            <h3>Finalize a compra</h3>
+            <p>Clique em "Finalizar compra" e você será direcionada para o atendimento pelo WhatsApp para concluir o pedido.</p>
+          </article>
+
+          <article class="ck-step-card">
+            <div class="ck-step-num" aria-hidden="true">2</div>
+            <h3>Faça o pagamento</h3>
+            <p>Escolha PIX ou cartão e conclua a transação em segundos, de forma rápida e 100% segura.</p>
+          </article>
+
+          <article class="ck-step-card">
+            <div class="ck-step-num" aria-hidden="true">3</div>
+            <h3>Receba seu conteúdo</h3>
+            <p>Após a confirmação do pagamento, você recebe o conteúdo exclusivo de forma imediata e discreta.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-logo">Sofis<span>Hub</span></p>
+      <p>Plataforma exclusiva</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ══════════════════════════════════════════
+       CHECKOUT — lógica dinâmica
+       Lê os parâmetros da URL:
+         ?produto=pack-basico&preco=25&foto=pack_basico.jpg
+       Ou usa o catálogo interno como fallback.
+    ══════════════════════════════════════════ */
+
+    // ── CATÁLOGO DE PRODUTOS ─────────────────
+    // Adicione aqui todos os seus produtos com imagem, preço, descrição e itens.
+    // As imagens devem estar na pasta do projeto.
+    const CATALOG = {
+      "com-seu-nome": {
+        name: "Pack Com Seu Nome",
+        desc: "Vídeo personalizado exclusivamente para você",
+        price: 30,
+        emoji: "🎙️",
+        photo: "", // ex: "fotos/pack_nome.jpg"
+        includes: [
+          "Duração de 1 a 2 minutos",
+          "Seu nome dito várias vezes",
+          "Totalmente personalizado",
+          "Entrega imediata",
+        ],
+        whatsapp: "Quero%20o%20Pack%20Com%20Seu%20Nome",
+      },
+      "pack-basico": {
+        name: "Pack Básico",
+        desc: "Corpo todo, sem enrolação",
+        price: 25,
+        emoji: "📸",
+        photo: "",
+        includes: [
+          "Fotos de corpo inteiro",
+          "Conteúdo sem censura",
+          "Entrega imediata",
+          "Acesso permanente",
+        ],
+        whatsapp: "Quero%20o%20Pack%20B%C3%A1sico",
+      },
+      "pack-novinho": {
+        name: "Pack Novinho",
+        desc: "7 vídeos + 1 foto · 5 minutos de conteúdo",
+        price: 50,
+        emoji: "🔥",
+        photo: "sofisa.jpg",
+        includes: [
+          "7 vídeos exclusivos",
+          "1 foto sem censura",
+          "5 minutos no total",
+          "Entrega imediata",
+        ],
+        whatsapp: "Quero%20o%20Pack%20Novinho",
+      },
+      "pack-platina": {
+        name: "Pack Platina",
+        desc: "18 vídeos + 10 fotos · 16 minutos premium",
+        price: 120,
+        emoji: "👑",
+        photo: "",
+        includes: [
+          "18 vídeos exclusivos",
+          "10 fotos premium",
+          "16 minutos de conteúdo",
+          "Entrega imediata",
+        ],
+        whatsapp: "Quero%20o%20Pack%20Platina",
+      },
+      "pack-personalizado": {
+        name: "Pack Personalizado",
+        desc: "Totalmente sob medida para você",
+        price: 60,
+        emoji: "✨",
+        photo: "",
+        includes: [
+          "Roteiro do seu jeito",
+          "Duração a combinar",
+          "100% exclusivo",
+          "Entrega combinada",
+        ],
+        whatsapp: "Quero%20um%20Pack%20Personalizado",
+      },
+      "vip-semanal": {
+        name: "VIP Semanal",
+        desc: "Acesso VIP por 7 dias",
+        price: 24.9,
+        emoji: "✦",
+        photo: "sofis.jpg",
+        includes: [
+          "Acesso VIP por 7 dias",
+          "Fotos e vídeos exclusivos",
+          "Conversa com prioridade",
+          "Conteúdo bônus surpresa",
+        ],
+        whatsapp: "Quero%20o%20VIP%20Semanal",
+      },
+      "vip-mensal": {
+        name: "VIP Mensal",
+        desc: "Acesso VIP completo por 30 dias",
+        price: 49.9,
+        emoji: "👑",
+        photo: "sofis.jpg",
+        includes: [
+          "Acesso VIP por 30 dias",
+          "Fotos e vídeos exclusivos",
+          "Conversa direta com prioridade",
+          "1 chamada de vídeo no mês",
+          "Desconto em todos os packs",
+          "Joguinhos juntos",
+        ],
+        whatsapp: "Quero%20o%20VIP%20Mensal",
+      },
+      "vip-trimestral": {
+        name: "VIP Trimestral",
+        desc: "Três meses de acesso VIP com desconto especial",
+        price: 129.9,
+        emoji: "◈",
+        photo: "sofis.jpg",
+        includes: [
+          "Acesso VIP por 90 dias",
+          "Fotos e vídeos exclusivos",
+          "3 chamadas de vídeo",
+          "Desconto em packs",
+          "Joguinhos juntos",
+        ],
+        whatsapp: "Quero%20o%20VIP%20Trimestral",
+      },
+      "vip-vitalicio": {
+        name: "VIP Vitalício",
+        desc: "Acesso permanente ao VIP",
+        price: 399.9,
+        emoji: "★",
+        photo: "sofis.jpg",
+        includes: [
+          "Acesso VIP permanente",
+          "Todo o conteúdo exclusivo",
+          "Chamadas de vídeo mensais",
+          "Desconto máximo em packs",
+          "Joguinhos juntos sempre",
+          "Prioridade absoluta",
+        ],
+        whatsapp: "Quero%20o%20VIP%20Vital%C3%ADcio",
+      },
+      "webnamoro-dia": {
+        name: "Webnamoro · 1 Dia",
+        desc: "Minha presença completa por 24 horas",
+        price: 49.9,
+        emoji: "♡",
+        photo: "sofis.jpg",
+        includes: [
+          "Conversa por 24h",
+          "Fotinhas exclusivas",
+          "Áudios carinhosos",
+          "Presença o dia todo",
+        ],
+        whatsapp: "Quero%20o%20Webnamoro%201%20Dia",
+      },
+      "webnamoro-dois-dias": {
+        name: "Webnamoro · 2 Dias",
+        desc: "Dois dias completos com presença constante",
+        price: 59.9,
+        emoji: "♡",
+        photo: "sofis.jpg",
+        includes: [
+          "Conversa por 48h",
+          "Fotinhas e vídeos exclusivos",
+          "Áudios carinhosos",
+          "Presença constante",
+        ],
+        whatsapp: "Quero%20o%20Webnamoro%202%20Dias",
+      },
+      "webnamoro-semana": {
+        name: "Webnamoro · 1 Semana",
+        desc: "Sete dias com presença garantida",
+        price: 89.9,
+        emoji: "♡",
+        photo: "sofis.jpg",
+        includes: [
+          "Conversa por 7 dias",
+          "Fotinhas e vídeos diários",
+          "1 chamada de vídeo",
+          "Joguinhos juntos",
+        ],
+        whatsapp: "Quero%20o%20Webnamoro%201%20Semana",
+      },
+      "webnamoro-mes": {
+        name: "Webnamoro · 1 Mês",
+        desc: "A experiência completa do webnamoro",
+        price: 149.9,
+        emoji: "♡",
+        photo: "sofis.jpg",
+        includes: [
+          "Chamada de vídeo semanal",
+          "Conversas à vontade",
+          "Acesso mensal ao VIP",
+          "1 pack de sua escolha",
+          "Fotinhas e vídeos do dia a dia",
+          "Joguinhos juntos",
+        ],
+        whatsapp: "Quero%20o%20Webnamoro%201%20M%C3%AAs",
+      },
+      "avaliacao-audio": {
+        name: "Avaliação por Áudio",
+        desc: "Minha voz avaliando do jeito mais íntimo",
+        price: 15,
+        emoji: "🎙️",
+        photo: "",
+        includes: [
+          "Áudio personalizado",
+          "Avaliação sincera",
+          "Entrega discreta",
+          "Duração conforme escolha",
+        ],
+        whatsapp: "Quero%20Avalia%C3%A7%C3%A3o%20por%20%C3%81udio",
+      },
+      "avaliacao-texto": {
+        name: "Avaliação por Texto",
+        desc: "Uma avaliação detalhada por escrito",
+        price: 10,
+        emoji: "💬",
+        photo: "",
+        includes: [
+          "Texto personalizado",
+          "Avaliação direta e honesta",
+          "Entrega discreta",
+          "Tamanho conforme escolha",
+        ],
+        whatsapp: "Quero%20Avalia%C3%A7%C3%A3o%20por%20Texto",
+      },
+      "chamada-video": {
+        name: "Chamada de Vídeo",
+        desc: "Chamada ao vivo, privada e exclusiva",
+        price: 20,
+        emoji: "📹",
+        photo: "sofis.jpg",
+        includes: [
+          "Chamada privada",
+          "Tempo conforme escolha",
+          "Agendamento pelo WhatsApp",
+          "Atendimento discreto",
+        ],
+        whatsapp: "Quero%20Chamada%20de%20V%C3%ADdeo",
+      },
+      "sexting-sem": {
+        name: "Sexting · Sem Mídias",
+        desc: "Conversas quentes e sensuais por mensagem",
+        price: 20,
+        emoji: "💬",
+        photo: "",
+        includes: [
+          "Conversa por texto",
+          "Duração conforme escolha",
+          "Fantasias combinadas",
+          "Atendimento discreto",
+        ],
+        whatsapp: "Quero%20Sexting%20sem%20M%C3%ADdias",
+      },
+      "sexting-com": {
+        name: "Sexting · Com Mídias",
+        desc: "Texto com fotos e vídeos exclusivos durante a conversa",
+        price: 40,
+        emoji: "🔥",
+        photo: "sofisa.jpg",
+        includes: [
+          "Conversa por texto",
+          "Fotos e vídeos exclusivos",
+          "Duração conforme escolha",
+          "Mídias em tempo real",
+        ],
+        whatsapp: "Quero%20Sexting%20com%20M%C3%ADdias",
+      },
+    };
+
+    // ── LÊ PARÂMETROS DA URL ────────────────
+    const params  = new URLSearchParams(window.location.search);
+    const prodKey = params.get("produto") || "pack-basico";
+    const baseProduct = CATALOG[prodKey] || CATALOG["pack-basico"];
+    const prodData = { ...baseProduct };
+
+    // Permite sobrescrever nome/preço/foto via URL para opções de serviços.
+    const overrideLabel = params.get("label");
+    if (overrideLabel) prodData.name = overrideLabel;
+
+    const overridePrice = params.get("preco");
+    if (overridePrice) {
+      const parsedPrice = Number.parseFloat(overridePrice.replace(",", "."));
+      if (!Number.isNaN(parsedPrice)) prodData.price = parsedPrice;
+    }
+
+    const overridePhoto = params.get("foto");
+    if (overridePhoto) prodData.photo = overridePhoto;
+
+    // ── PREENCHE O DOM ─────────────────────
+    function formatBRL(n) {
+      return "R$ " + n.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    }
+
+    // Título da aba
+    document.title = `Sofis Hub | Checkout · ${prodData.name}`;
+
+    // Nome, desc, preço
+    document.getElementById("ck-prod-name").textContent  = prodData.name;
+    document.getElementById("ck-prod-desc").textContent  = prodData.desc;
+    document.getElementById("ck-prod-price").textContent = formatBRL(prodData.price);
+    document.getElementById("ck-subtotal").textContent   = formatBRL(prodData.price);
+    document.getElementById("ck-total").textContent      = formatBRL(prodData.price);
+
+    // Thumb / preview
+    const thumbImg   = document.getElementById("ck-thumb-img");
+    const thumbIcon  = document.getElementById("ck-thumb-icon");
+    const previewImg = document.getElementById("ck-preview-img");
+    const previewPh  = document.getElementById("ck-preview-placeholder");
+
+    if (prodData.photo) {
+      thumbImg.src = prodData.photo;
+      thumbImg.alt = prodData.name;
+      thumbImg.style.display = "block";
+      thumbIcon.style.display = "none"; // esconde lock icon, mostra imagem blur
+
+      previewImg.src = prodData.photo;
+      previewImg.alt = prodData.name;
+      previewImg.style.display = "block";
+      previewPh.style.display  = "none";
+    } else {
+      thumbImg.style.display  = "none";
+      thumbIcon.textContent   = prodData.emoji;
+      thumbIcon.style.fontSize = "2rem";
+
+      previewImg.style.display = "none";
+      previewPh.querySelector("span").textContent = prodData.emoji;
+    }
+
+    // Itens inclusos
+    const grid = document.getElementById("ck-includes-grid");
+    prodData.includes.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "ck-inc-item";
+      el.innerHTML = `<span class="ck-inc-check" aria-hidden="true">✓</span><span>${item}</span>`;
+      grid.appendChild(el);
+    });
+
+    // ── PIX HOOPAY ─────────────────────────
+    const ctaBtn = document.getElementById("ck-cta-btn");
+    const pixPanel = document.getElementById("ck-pix-panel");
+    const pixStatus = document.getElementById("ck-pix-status");
+    const pixQr = document.getElementById("ck-pix-qr");
+    const pixLabel = document.getElementById("ck-pix-label");
+    const pixCode = document.getElementById("ck-pix-code");
+    const pixCopy = document.getElementById("ck-pix-copy");
+    const pixOrder = document.getElementById("ck-pix-order");
+    let pixStatusTimer = null;
+
+    function setPixStatus(text) {
+      pixPanel.classList.add("active");
+      pixStatus.textContent = text;
+    }
+
+    function getCustomerData() {
+      let document = localStorage.getItem("sofisCustomerDocument") || "";
+      if (!document) {
+        document = prompt("Digite seu CPF ou CNPJ para gerar o PIX:") || "";
+        document = document.replace(/\D/g, "");
+        if (document) localStorage.setItem("sofisCustomerDocument", document);
+      }
+
+      return {
+        name: localStorage.getItem("sofisCustomerName") || "Cliente Sofis Hub",
+        email: localStorage.getItem("sofisCustomerEmail") || "cliente@sofishub.com.br",
+        phone: localStorage.getItem("sofisCustomerPhone") || "11999999999",
+        document
+      };
+    }
+
+    async function parseJsonResponse(response) {
+      const text = await response.text();
+      if (!text) return {};
+      try {
+        return JSON.parse(text);
+      } catch {
+        return { error: text };
+      }
+    }
+
+    function renderPix(data) {
+      if (data.pixQrCode) {
+        pixQr.src = data.pixQrCode.startsWith("data:") ? data.pixQrCode : `data:image/png;base64,${data.pixQrCode}`;
+        pixQr.style.display = "block";
+      }
+
+      if (data.pixPayload) {
+        pixCode.value = data.pixPayload;
+        pixLabel.style.display = "block";
+        pixCode.style.display = "block";
+        pixCopy.style.display = "block";
+      }
+
+      if (data.orderUUID) {
+        pixOrder.textContent = `Pedido: ${data.orderUUID}`;
+        pixOrder.style.display = "block";
+        startPixStatusPolling(data.orderUUID);
+      }
+
+      setPixStatus(data.status ? `Status: ${data.status}` : "PIX gerado. Aguardando pagamento.");
+    }
+
+    async function startPixStatusPolling(orderUUID) {
+      if (pixStatusTimer) clearInterval(pixStatusTimer);
+
+      const checkStatus = async () => {
+        try {
+          const response = await fetch(`/api/pix/status/${encodeURIComponent(orderUUID)}`);
+          const data = await parseJsonResponse(response);
+          if (data.status) setPixStatus(`Status: ${data.status}`);
+          if (["paid", "approved", "completed", "success"].includes(String(data.status).toLowerCase())) {
+            clearInterval(pixStatusTimer);
+            pixStatusTimer = null;
+            setPixStatus("Pagamento confirmado.");
+          }
+        } catch {
+          setPixStatus("PIX gerado. Não foi possível atualizar o status agora.");
+        }
+      };
+
+      await checkStatus();
+      pixStatusTimer = setInterval(checkStatus, 10000);
+    }
+
+    ctaBtn.addEventListener("click", async () => {
+      ctaBtn.disabled = true;
+      setPixStatus("Gerando cobrança PIX...");
+
+      try {
+        const response = await fetch("/api/pix/charge", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            source: "checkout",
+            product: {
+              id: prodKey,
+              name: prodData.name,
+              price: prodData.price,
+              image: prodData.photo || ""
+            },
+            customer: getCustomerData()
+          })
+        });
+
+        const data = await parseJsonResponse(response);
+        if (!response.ok) throw new Error(data.error || data.details?.message || JSON.stringify(data.details || {}) || `Erro ao gerar PIX (${response.status}).`);
+        renderPix(data);
+      } catch (error) {
+        setPixStatus(error.message || "Erro ao gerar PIX. Tente novamente.");
+      } finally {
+        ctaBtn.disabled = false;
+      }
+    });
+
+    pixCopy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(pixCode.value);
+        pixCopy.textContent = "Código copiado";
+        setTimeout(() => { pixCopy.textContent = "Copiar código PIX"; }, 1800);
+      } catch {
+        pixCode.select();
+      }
+    });
+
+    // ── TIMER ──────────────────────────────
+    let totalSeconds = 15 * 60;
+    const timerEl = document.getElementById("ck-timer");
+
+    const tick = setInterval(() => {
+      totalSeconds--;
+      if (totalSeconds <= 0) {
+        clearInterval(tick);
+        timerEl.textContent = "00:00";
+        timerEl.style.color = "var(--muted)";
+        return;
+      }
+      const m = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+      const s = (totalSeconds % 60).toString().padStart(2, "0");
+      timerEl.textContent = `${m}:${s}`;
+    }, 1000);
+
+    // ── SELEÇÃO DE MÉTODO ──────────────────
+    document.querySelectorAll(".ck-method").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".ck-method").forEach(b => {
+          b.classList.remove("selected");
+          b.setAttribute("aria-pressed", "false");
+        });
+        btn.classList.add("selected");
+        btn.setAttribute("aria-pressed", "true");
+      });
+    });
+  </script>
+</body>
+</html>
